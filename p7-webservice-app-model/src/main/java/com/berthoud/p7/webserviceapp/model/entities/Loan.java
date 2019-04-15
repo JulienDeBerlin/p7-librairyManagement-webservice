@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-public class Loan {
+public class Loan extends AuditModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

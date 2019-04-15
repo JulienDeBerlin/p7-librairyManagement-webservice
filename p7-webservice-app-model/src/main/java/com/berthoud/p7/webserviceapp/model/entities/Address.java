@@ -7,13 +7,15 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Address {
+public class Address extends AuditModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
+
     private String additionalAddressField1;
     private String additionalAddressField2;
+
     private String road;
     private int houseNumber;
     private String zipCode;

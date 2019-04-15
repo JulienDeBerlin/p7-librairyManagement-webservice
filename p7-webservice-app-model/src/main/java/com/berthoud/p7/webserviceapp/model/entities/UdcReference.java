@@ -8,7 +8,7 @@ import java.util.Objects;
 
 
 @Entity
-public class UdcReference {
+public class UdcReference extends AuditModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class Tag {
+public class Tag extends AuditModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

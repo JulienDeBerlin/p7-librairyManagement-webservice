@@ -7,26 +7,29 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class BookReference {
+public class BookReference extends AuditModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
-    private String name;
+    private String title;
     private String authorFirstName;
     private String authorSurname;
     private String isbn13;
     private String publisher;
     private String summary;
+    private short yearPublication;
 
-    public BookReference(int id, String name, String authorFirstName, String authorSurname, String isbn13, String publisher, String summary) {
+
+    public BookReference(int id, String title, String authorFirstName, String authorSurname, String isbn13, String publisher, String summary) {
         this.id = id;
-        this.name = name;
+        this.title = title;
         this.authorFirstName = authorFirstName;
         this.authorSurname = authorSurname;
         this.isbn13 = isbn13;
         this.publisher = publisher;
         this.summary = summary;
+        this.yearPublication = yearPublication;
     }
 
     public BookReference() {
@@ -40,12 +43,12 @@ public class BookReference {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getAuthorFirstName() {
@@ -88,13 +91,22 @@ public class BookReference {
         this.summary = summary;
     }
 
+    public short getYearPublication() {
+        return yearPublication;
+    }
+
+    public void setYearPublication(short yearPublication) {
+        this.yearPublication = yearPublication;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookReference that = (BookReference) o;
         return id == that.id &&
-                name.equals(that.name) &&
+                yearPublication == that.yearPublication &&
+                title.equals(that.title) &&
                 authorFirstName.equals(that.authorFirstName) &&
                 authorSurname.equals(that.authorSurname) &&
                 isbn13.equals(that.isbn13) &&
@@ -104,6 +116,6 @@ public class BookReference {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, authorFirstName, authorSurname, isbn13, publisher, summary);
+        return Objects.hash(id, title, authorFirstName, authorSurname, isbn13, publisher, summary, yearPublication);
     }
 }

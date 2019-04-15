@@ -8,7 +8,7 @@ import java.util.Objects;
 
 
 @Entity
-public class Librairy {
+public class Librairy extends AuditModel{
 
     @Id
     @GeneratedValue (strategy = GenerationType.SEQUENCE)

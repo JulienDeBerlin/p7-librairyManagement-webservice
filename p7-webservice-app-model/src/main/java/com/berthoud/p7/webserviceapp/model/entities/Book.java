@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-public class Book {
+public class Book extends AuditModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

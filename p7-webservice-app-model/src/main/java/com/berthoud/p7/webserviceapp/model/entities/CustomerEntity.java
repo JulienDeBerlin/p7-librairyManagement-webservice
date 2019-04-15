@@ -2,16 +2,13 @@
 package com.berthoud.p7.webserviceapp.model.entities;
 
 
-        import javax.persistence.Entity;
-        import javax.persistence.GeneratedValue;
-        import javax.persistence.GenerationType;
-        import javax.persistence.Id;
+        import javax.persistence.*;
         import java.time.LocalDate;
         import java.util.Objects;
 
 
 @Entity
-public class Customer {
+public class CustomerEntity extends AuditModel{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -19,18 +16,18 @@ public class Customer {
     private String firstName;
     private String surname;
 
-    enum Sex{
-            MALE, FEMALE,OTHER
-    }
-    private Sex sex;
+    private String sex;
 
     private LocalDate dateExpirationMembership;
     private String phone;
     private String email;
+
+    @Column(unique=true, nullable=false)
     private String nickname;
     private String password;
 
-    public Customer(String firstName, String surname, Sex sex, LocalDate dateExpirationMembership, String phone, String email, String nickname, String password) {
+
+    public CustomerEntity(String firstName, String surname, String sex, LocalDate dateExpirationMembership, String phone, String email, String nickname, String password) {
         this.firstName = firstName;
         this.surname = surname;
         this.sex = sex;
@@ -41,7 +38,9 @@ public class Customer {
         this.password = password;
     }
 
-    public Customer() {
+
+
+    public CustomerEntity() {
     }
 
     public int getId() {
@@ -68,11 +67,11 @@ public class Customer {
         this.surname = surname;
     }
 
-    public Sex getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Sex sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -120,16 +119,16 @@ public class Customer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Customer customer = (Customer) o;
-        return id == customer.id &&
-                firstName.equals(customer.firstName) &&
-                surname.equals(customer.surname) &&
-                sex == customer.sex &&
-                dateExpirationMembership.equals(customer.dateExpirationMembership) &&
-                phone.equals(customer.phone) &&
-                email.equals(customer.email) &&
-                nickname.equals(customer.nickname) &&
-                password.equals(customer.password);
+        CustomerEntity customerEntity = (CustomerEntity) o;
+        return id == customerEntity.id &&
+                firstName.equals(customerEntity.firstName) &&
+                surname.equals(customerEntity.surname) &&
+                sex == customerEntity.sex &&
+                dateExpirationMembership.equals(customerEntity.dateExpirationMembership) &&
+                phone.equals(customerEntity.phone) &&
+                email.equals(customerEntity.email) &&
+                nickname.equals(customerEntity.nickname) &&
+                password.equals(customerEntity.password);
     }
 
     @Override
