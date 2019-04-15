@@ -1,0 +1,11 @@
+com/berthoud/p7/webserviceapp/endpoints/CustomerEndpoint.class
+com/berthoud/p7/webserviceapp/WebserviceApp.class
+com/berthoud/p7/webserviceapp/ws/package-info.class
+com/berthoud/p7/webserviceapp/ws/CustomerType.class
+com/berthoud/p7/webserviceapp/ws/GetCustomerByIdRequest.class
+com/berthoud/p7/webserviceapp/config/WebServiceConfig.class
+com/berthoud/p7/webserviceapp/ws/ObjectFactory.class
+com/berthoud/p7/webserviceapp/ws/GetCustomerByNicknameRequest.class
+com/berthoud/p7/webserviceapp/ws/GetCustomerByIdResponse.class
+com/berthoud/p7/webserviceapp/ws/Sex.class
+com/berthoud/p7/webserviceapp/ws/GetCustomerByNicknameResponse.class

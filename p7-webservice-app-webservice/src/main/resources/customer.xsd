@@ -1,0 +1,59 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://com.berthoud.p7"
+           targetNamespace="http://com.berthoud.p7" elementFormDefault="qualified">
+
+    <xs:element title="getCustomerByNicknameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element title="nickname" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element title="getCustomerByNicknameResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element title="customerType" type="tns:customerType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element title="getCustomerByIdRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element title="id" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element title="getCustomerByIdResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element title="customerType" type="tns:customerType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
+    <xs:complexType title="customerType">
+        <xs:sequence>
+            <xs:element title="id" type="xs:int"/>
+            <xs:element title="firstName" type="xs:string"/>
+            <xs:element title="sex" type="tns:sex"/>
+            <xs:element title="dateExpirationMembership" type="xs:string"/>
+            <xs:element title="phone" type="xs:string"/>
+            <xs:element title="email" type="xs:string"/>
+            <xs:element title="nickname" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:simpleType title="sex">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="male"/>
+            <xs:enumeration value="female"/>
+            <xs:enumeration value="other"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+</xs:schema>
+

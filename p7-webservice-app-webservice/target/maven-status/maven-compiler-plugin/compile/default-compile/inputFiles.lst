@@ -1,0 +1,11 @@
+/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/WebserviceApp/p7-webservice-app-webservice/src/main/java/com/berthoud/p7/webserviceapp/config/WebServiceConfig.java
+/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/WebserviceApp/p7-webservice-app-webservice/src/main/java/com/berthoud/p7/webserviceapp/ws/ObjectFactory.java
+/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/WebserviceApp/p7-webservice-app-webservice/src/main/java/com/berthoud/p7/webserviceapp/ws/CustomerType.java
+/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/WebserviceApp/p7-webservice-app-webservice/src/main/java/com/berthoud/p7/webserviceapp/endpoints/CustomerEndpoint.java
+/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/WebserviceApp/p7-webservice-app-webservice/src/main/java/com/berthoud/p7/webserviceapp/ws/package-info.java
+/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/WebserviceApp/p7-webservice-app-webservice/src/main/java/com/berthoud/p7/webserviceapp/ws/Sex.java
+/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/WebserviceApp/p7-webservice-app-webservice/src/main/java/com/berthoud/p7/webserviceapp/ws/GetCustomerByIdRequest.java
+/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/WebserviceApp/p7-webservice-app-webservice/src/main/java/com/berthoud/p7/webserviceapp/ws/GetCustomerByIdResponse.java
+/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/WebserviceApp/p7-webservice-app-webservice/src/main/java/com/berthoud/p7/webserviceapp/ws/GetCustomerByNicknameRequest.java
+/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/WebserviceApp/p7-webservice-app-webservice/src/main/java/com/berthoud/p7/webserviceapp/WebserviceApp.java
+/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/WebserviceApp/p7-webservice-app-webservice/src/main/java/com/berthoud/p7/webserviceapp/ws/GetCustomerByNicknameResponse.java
