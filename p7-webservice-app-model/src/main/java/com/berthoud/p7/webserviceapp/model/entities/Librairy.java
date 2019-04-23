@@ -1,26 +1,32 @@
 package com.berthoud.p7.webserviceapp.model.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Objects;
+import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
-public class Librairy extends AuditModel{
+public class Librairy extends AuditModel {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String name;
 
-    public Librairy(int id, String name) {
-        this.id = id;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn (name = "address_id")
+    private Address address;
+
+    @OneToMany (mappedBy = "librairy", cascade = CascadeType.ALL)
+    private Set<Book> books;
+
+    public Librairy(String name, Address address, Set<Book> books) {
         this.name = name;
+        this.address = address;
+        this.books = books;
     }
 
-    public Librairy() {
+    public Librairy(){
+
     }
 
     public int getId() {
@@ -39,17 +45,19 @@ public class Librairy extends AuditModel{
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Librairy librairy = (Librairy) o;
-        return id == librairy.id &&
-                name.equals(librairy.name);
+    public Address getAddress() {
+        return address;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
     }
 }

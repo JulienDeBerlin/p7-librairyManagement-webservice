@@ -1,33 +1,48 @@
 package com.berthoud.p7.webserviceapp.model.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Book extends AuditModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @Column(nullable=false)
     private LocalDate datePurchase;
 
-    enum Status {
-        AVAILABLE, BOOKED, BORROWED
-    }
-    private Status status;
+//    enum Status {
+//        AVAILABLE, BOOKED, BORROWED
+//    }
 
-    public Book(int id, LocalDate datePurchase, Status status) {
-        this.id = id;
+    private String status;
+
+    @ManyToOne
+    @JoinColumn (name = "librairy_id")
+    private Librairy librairy;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    private Set<Loan> loans;
+
+    @ManyToOne
+    @JoinColumn (name = "book_reference_id")
+    private BookReference bookReference;
+
+    public Book(LocalDate datePurchase, String status, Librairy librairy, Set<Loan> loans, BookReference bookReference) {
         this.datePurchase = datePurchase;
         this.status = status;
+        this.librairy = librairy;
+        this.loans = loans;
+        this.bookReference = bookReference;
     }
 
-    public Book() {
+    public Book(){
+
     }
+
 
     public int getId() {
         return id;
@@ -45,26 +60,35 @@ public class Book extends AuditModel {
         this.datePurchase = datePurchase;
     }
 
-    public Status getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return id == book.id &&
-                datePurchase.equals(book.datePurchase) &&
-                status == book.status;
+    public Librairy getLibrairy() {
+        return librairy;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, datePurchase, status);
+    public void setLibrairy(Librairy librairy) {
+        this.librairy = librairy;
+    }
+
+    public Set<Loan> getLoans() {
+        return loans;
+    }
+
+    public void setLoans(Set<Loan> loans) {
+        this.loans = loans;
+    }
+
+    public BookReference getBookReference() {
+        return bookReference;
+    }
+
+    public void setBookReference(BookReference bookReference) {
+        this.bookReference = bookReference;
     }
 }

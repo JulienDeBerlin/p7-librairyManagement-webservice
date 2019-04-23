@@ -1,38 +1,49 @@
 package com.berthoud.p7.webserviceapp.model.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Objects;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
-public class Address extends AuditModel{
+public class Address extends AuditModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
     private String additionalAddressField1;
     private String additionalAddressField2;
 
+    @Column(nullable = false)
     private String road;
+
+    @Column(nullable = false)
     private int houseNumber;
+
+    @Column(nullable = false)
     private String zipCode;
+
+    @Column(nullable = false)
     private String city;
 
+    @OneToMany (mappedBy = "address")
+    private Set<Customer> customers;
 
-    public Address(int id, String additionalAddressField1, String additionalAddressField2, String road, int houseNumber, String zipCode, String city) {
-        this.id = id;
+    @OneToOne (mappedBy = "address")
+    private Librairy librairy;
+
+    public Address(String additionalAddressField1, String additionalAddressField2, String road, int houseNumber, String zipCode, String city, Set<Customer> customers, Librairy librairy) {
         this.additionalAddressField1 = additionalAddressField1;
         this.additionalAddressField2 = additionalAddressField2;
         this.road = road;
         this.houseNumber = houseNumber;
         this.zipCode = zipCode;
         this.city = city;
+        this.customers = customers;
+        this.librairy = librairy;
     }
 
-    public Address() {
+    public Address(){
+
     }
 
     public int getId() {
@@ -91,22 +102,19 @@ public class Address extends AuditModel{
         this.city = city;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Address address = (Address) o;
-        return id == address.id &&
-                houseNumber == address.houseNumber &&
-                Objects.equals(additionalAddressField1, address.additionalAddressField1) &&
-                Objects.equals(additionalAddressField2, address.additionalAddressField2) &&
-                road.equals(address.road) &&
-                zipCode.equals(address.zipCode) &&
-                city.equals(address.city);
+    public Set<Customer> getCustomers() {
+        return customers;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, additionalAddressField1, additionalAddressField2, road, houseNumber, zipCode, city);
+    public void setCustomers(Set<Customer> customers) {
+        this.customers = customers;
+    }
+
+    public Librairy getLibrairy() {
+        return librairy;
+    }
+
+    public void setLibrairy(Librairy librairy) {
+        this.librairy = librairy;
     }
 }

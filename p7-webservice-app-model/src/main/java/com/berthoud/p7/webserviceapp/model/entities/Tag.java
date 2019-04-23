@@ -1,25 +1,28 @@
 package com.berthoud.p7.webserviceapp.model.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Objects;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Tag extends AuditModel{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @Column(nullable=false)
     private String name;
 
-    public Tag(int id, String name) {
-        this.id = id;
+    @ManyToMany (mappedBy = "tags")
+    private Set<BookReference> bookReferences;
+
+    public Tag(String name, Set<BookReference> bookReferences) {
         this.name = name;
+        this.bookReferences = bookReferences;
     }
 
-    public Tag() {
+    public Tag(){
+
     }
 
     public int getId() {
@@ -38,17 +41,13 @@ public class Tag extends AuditModel{
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Tag tag = (Tag) o;
-        return id == tag.id &&
-                name.equals(tag.name);
+    public Set<BookReference> getBookReferences() {
+        return bookReferences;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name);
+    public void setBookReferences(Set<BookReference> bookReferences) {
+        this.bookReferences = bookReferences;
     }
 }
+
+

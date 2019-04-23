@@ -1,28 +1,46 @@
 package com.berthoud.p7.webserviceapp.model.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Objects;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class BookReference extends AuditModel{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @Column(nullable=false)
     private String title;
+
+    @Column(nullable=false)
     private String authorFirstName;
+
+    @Column(nullable=false)
     private String authorSurname;
+
+    @Column(nullable=false)
     private String isbn13;
+
+    @Column(nullable=false)
     private String publisher;
+
+    @Column(nullable=false)
     private String summary;
-    private short yearPublication;
 
+    @Column(nullable=false)
+    private String yearPublication;
 
-    public BookReference(int id, String title, String authorFirstName, String authorSurname, String isbn13, String publisher, String summary) {
-        this.id = id;
+    @OneToMany (mappedBy = "bookReference", cascade = CascadeType.ALL)
+    private Set<Book> books;
+
+    @ManyToMany (cascade = CascadeType.ALL)
+    @JoinTable (name = "books_tags",
+            joinColumns = @JoinColumn (name = "book_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"))
+    private Set<Tag> tags;
+
+    public BookReference(String title, String authorFirstName, String authorSurname, String isbn13, String publisher, String summary, String yearPublication, Set<Book> books, Set<Tag> tags) {
         this.title = title;
         this.authorFirstName = authorFirstName;
         this.authorSurname = authorSurname;
@@ -30,9 +48,12 @@ public class BookReference extends AuditModel{
         this.publisher = publisher;
         this.summary = summary;
         this.yearPublication = yearPublication;
+        this.books = books;
+        this.tags = tags;
     }
 
-    public BookReference() {
+    public BookReference(){
+
     }
 
     public int getId() {
@@ -91,31 +112,27 @@ public class BookReference extends AuditModel{
         this.summary = summary;
     }
 
-    public short getYearPublication() {
+    public String getYearPublication() {
         return yearPublication;
     }
 
-    public void setYearPublication(short yearPublication) {
+    public void setYearPublication(String yearPublication) {
         this.yearPublication = yearPublication;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BookReference that = (BookReference) o;
-        return id == that.id &&
-                yearPublication == that.yearPublication &&
-                title.equals(that.title) &&
-                authorFirstName.equals(that.authorFirstName) &&
-                authorSurname.equals(that.authorSurname) &&
-                isbn13.equals(that.isbn13) &&
-                publisher.equals(that.publisher) &&
-                summary.equals(that.summary);
+    public Set<Book> getBooks() {
+        return books;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, title, authorFirstName, authorSurname, isbn13, publisher, summary, yearPublication);
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
+
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
     }
 }

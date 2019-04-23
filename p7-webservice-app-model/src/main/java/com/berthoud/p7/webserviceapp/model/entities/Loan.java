@@ -1,32 +1,46 @@
 package com.berthoud.p7.webserviceapp.model.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Entity
-public class Loan extends AuditModel{
+public class Loan extends AuditModel {
+
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @Column(nullable = false)
     private LocalDate dateBegin;
+
+    @Column(nullable = false)
     private LocalDate dateEnd;
-    private boolean isExtended;
+
+    @Column(nullable = false)
+    private int numberExtensions;
+
     private LocalDate dateBack;
 
-    public Loan(int id, LocalDate dateBegin, LocalDate dateEnd, boolean isExtended, LocalDate dateBack) {
-        this.id = id;
+    @ManyToOne
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "book_id")
+    private Book book;
+
+    public Loan(LocalDate dateBegin, LocalDate dateEnd, int numberExtensions, LocalDate dateBack, Customer customer, Book book) {
         this.dateBegin = dateBegin;
         this.dateEnd = dateEnd;
-        this.isExtended = isExtended;
+        this.numberExtensions = numberExtensions;
         this.dateBack = dateBack;
+        this.customer = customer;
+        this.book = book;
     }
 
     public Loan() {
+
     }
 
     public int getId() {
@@ -53,12 +67,12 @@ public class Loan extends AuditModel{
         this.dateEnd = dateEnd;
     }
 
-    public boolean isExtended() {
-        return isExtended;
+    public int getNumberExtensions() {
+        return numberExtensions;
     }
 
-    public void setExtended(boolean extended) {
-        isExtended = extended;
+    public void setNumberExtensions(int numberExtensions) {
+        this.numberExtensions = numberExtensions;
     }
 
     public LocalDate getDateBack() {
@@ -69,20 +83,19 @@ public class Loan extends AuditModel{
         this.dateBack = dateBack;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Loan loan = (Loan) o;
-        return id == loan.id &&
-                isExtended == loan.isExtended &&
-                dateBegin.equals(loan.dateBegin) &&
-                dateEnd.equals(loan.dateEnd) &&
-                Objects.equals(dateBack, loan.dateBack);
+    public Customer getCustomer() {
+        return customer;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, dateBegin, dateEnd, isExtended, dateBack);
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
     }
 }

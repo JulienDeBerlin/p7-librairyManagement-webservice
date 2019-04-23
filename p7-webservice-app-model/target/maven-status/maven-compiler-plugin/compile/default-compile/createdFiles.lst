@@ -1,9 +1,7 @@
-com/berthoud/p7/webserviceapp/model/entities/UdcReference.class
 com/berthoud/p7/webserviceapp/model/entities/AuditModel.class
 com/berthoud/p7/webserviceapp/model/entities/Book.class
-com/berthoud/p7/webserviceapp/model/entities/CustomerEntity.class
+com/berthoud/p7/webserviceapp/model/entities/Customer.class
 com/berthoud/p7/webserviceapp/model/entities/Address.class
-com/berthoud/p7/webserviceapp/model/entities/Book$Status.class
 com/berthoud/p7/webserviceapp/model/entities/Librairy.class
 com/berthoud/p7/webserviceapp/model/entities/Loan.class
 com/berthoud/p7/webserviceapp/model/entities/BookReference.class

@@ -36,7 +36,7 @@
     <!-- Dependencies -->
     <!-- =============================================================== -->
 
-<dependencyManagement>
+    <dependencyManagement>
         <dependencies>
 
             <!-- ===== Modules ===== -->
@@ -107,8 +107,7 @@
 
         </dependencies>
 
-</dependencyManagement>
-
+    </dependencyManagement>
 
 
     <build>
@@ -118,7 +117,33 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>jaxb2-maven-plugin</artifactId>
+                    <version>2.3.1</version>
+                    <executions>
+                        <execution>
+                            <id>xjc-schema</id>
+                            <goals>
+                                <goal>xjc</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <sources>
+                            <source>
+                                /Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/src/main/resources/customer.xsd
+                            </source>
+                        </sources>
+                        <packageName>com.berthoud.p7.webserviceapp.ws</packageName>
+                        <clearOutputDir>false</clearOutputDir>
+                    </configuration>
+                </plugin>
+
             </plugins>
+
+
         </pluginManagement>
     </build>
 
