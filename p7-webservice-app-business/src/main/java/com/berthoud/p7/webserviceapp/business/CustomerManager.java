@@ -14,8 +14,8 @@ public class CustomerManager {
     CustomerDAO customerDAO;
 
 
-    public Customer login (String nickname, String password){
-        List<Customer> customerList = customerDAO.findByNicknameAndPassword(nickname, password);
+    public Customer login (String email, String password){
+        List<Customer> customerList = customerDAO.findByEmailAndPassword(email, password);
         if (customerList.isEmpty()){
             return null;
         } else {

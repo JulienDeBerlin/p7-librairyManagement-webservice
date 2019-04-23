@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface CustomerDAO {
 
-    List<Customer> findByNicknameAndPassword(String nickname, String password);
+    List<Customer> findByEmailAndPassword(String email, String password);
     Optional<Customer> findById(int id);
 
 

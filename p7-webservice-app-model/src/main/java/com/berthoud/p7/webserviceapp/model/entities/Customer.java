@@ -27,9 +27,6 @@ public class Customer extends AuditModel{
     private String email;
 
     @Column(nullable=false)
-    private String nickname;
-
-    @Column(nullable=false)
     private String password;
 
     @ManyToOne (cascade = CascadeType.ALL)
@@ -39,14 +36,13 @@ public class Customer extends AuditModel{
     @OneToMany (mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Loan> loans;
 
-    public Customer(String firstName, String surname, String sex, LocalDate dateExpirationMembership, String phone, String email, String nickname, String password, Address address, Set<Loan> loans) {
+    public Customer(String firstName, String surname, String sex, LocalDate dateExpirationMembership, String phone, String email, String password, Address address, Set<Loan> loans) {
         this.firstName = firstName;
         this.surname = surname;
         this.sex = sex;
         this.dateExpirationMembership = dateExpirationMembership;
         this.phone = phone;
         this.email = email;
-        this.nickname = nickname;
         this.password = password;
         this.address = address;
         this.loans = loans;
@@ -110,14 +106,6 @@ public class Customer extends AuditModel{
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 
     public String getPassword() {
