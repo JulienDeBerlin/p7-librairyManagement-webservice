@@ -10,7 +10,7 @@ import java.util.List;
 public interface CustomerRepository extends CrudRepository <Customer, Integer> , CustomerDAO {
 
  List<Customer> findBySurnameIgnoreCase (String surname);
- List <Customer> findByEmailAndPassword(String email, String password);
+ List<Customer> findByEmailAndPassword(String email, String password);
 
  // here we instead of the findAll in-built method, we use JPQL:
  @Query ("from Customer")

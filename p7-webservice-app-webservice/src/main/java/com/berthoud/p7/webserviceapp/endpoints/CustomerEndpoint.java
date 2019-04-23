@@ -3,7 +3,7 @@ package com.berthoud.p7.webserviceapp.endpoints;
 import com.berthoud.p7.webserviceapp.business.CustomerManager;
 import com.berthoud.p7.webserviceapp.model.entities.Customer;
 import com.berthoud.p7.webserviceapp.model.entities.Loan;
-import com.berthoud.p7.webserviceapp.ws.*;
+import com.berthoud.p7.webserviceapp.ws.customers.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,7 +34,7 @@ public class CustomerEndpoint {
     public LoginCustomerResponse getResponse(@RequestPayload LoginCustomerRequest request) throws DatatypeConfigurationException {
         LoginCustomerResponse response = new LoginCustomerResponse();
 
-        Customer customer = customerManager.login(request.getNickname(), request.getPassword());
+        Customer customer = customerManager.login(request.getEmail(), request.getPassword());
         CustomerWs customerWs = new CustomerWs();
 
         BeanUtils.copyProperties(customer, customerWs);

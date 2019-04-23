@@ -1,7 +1,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://com.berthoud.p7"
            targetNamespace="http://com.berthoud.p7" elementFormDefault="qualified">
 
-    <xs:element name="BookRequestByTitle">
+    <xs:element name="bookByTitleRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="titleElement" type="xs:string"/>
@@ -9,7 +9,7 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="BookResponse">
+    <xs:element name="bookByTitleResponse">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="bookReferences" type="tns:bookReferenceWs" maxOccurs="unbounded" minOccurs="0"/>
@@ -27,7 +27,7 @@
             <xs:element name="publisher" type="xs:string"/>
             <xs:element name="yearPublication" type="xs:string"/>
             <xs:element name="summary" type="xs:string"/>
-            <xs:element name="book" type="tns:bookWs"/>
+            <xs:element name="book" type="tns:bookWs" maxOccurs="unbounded" minOccurs="0"/>
         </xs:sequence>
     </xs:complexType>
 
