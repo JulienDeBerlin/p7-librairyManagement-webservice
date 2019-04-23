@@ -104,7 +104,6 @@
 //        Customer c1 = new Customer();
 //        c1.setSurname("Malika");
 //        c1.setFirstName("Djarir");
-//        c1.setNickname("adjarir");
 //        c1.setPassword("soleil");
 //        c1.setSex("F");
 //        c1.setPhone("0385303955");
@@ -145,7 +144,6 @@
 //        Customer customer = new Customer();
 //        customer.setSurname("Pierre");
 //        customer.setFirstName("Dubuc");
-//        customer.setNickname("Pierrot");
 //        customer.setPassword("soleil");
 //        customer.setSex("M");
 //        customer.setPhone("0385303955");
@@ -159,7 +157,7 @@
 //    @Test
 //    @Transactional
 //    public void testLogin() {
-//        Customer customer1 = customerManager.login("mdjarir", "soleil");
+//        Customer customer1 = customerManager.login("malika@yahoo.fr", "soleil");
 //        assertNotNull(customer1);
 //
 //
