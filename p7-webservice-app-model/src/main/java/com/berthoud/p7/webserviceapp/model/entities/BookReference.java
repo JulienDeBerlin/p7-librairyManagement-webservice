@@ -35,8 +35,8 @@ public class BookReference extends AuditModel{
     private Set<Book> books;
 
     @ManyToMany (cascade = CascadeType.ALL)
-    @JoinTable (name = "books_tags",
-            joinColumns = @JoinColumn (name = "book_id", referencedColumnName = "id"),
+    @JoinTable (name = "book_references_tags",
+            joinColumns = @JoinColumn (name = "bookReference_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "tag_id", referencedColumnName = "id"))
     private Set<Tag> tags;
 

@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
+
+
 @Entity
 public class Book extends AuditModel {
 
@@ -11,27 +13,28 @@ public class Book extends AuditModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private LocalDate datePurchase;
 
-//    enum Status {
-//        AVAILABLE, BOOKED, BORROWED
-//    }
+    public enum Status {
+        AVAILABLE, BOOKED, BORROWED
+    }
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @ManyToOne
-    @JoinColumn (name = "librairy_id")
+    @JoinColumn(name = "librairy_id")
     private Librairy librairy;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
     private Set<Loan> loans;
 
     @ManyToOne
-    @JoinColumn (name = "book_reference_id")
+    @JoinColumn(name = "book_reference_id")
     private BookReference bookReference;
 
-    public Book(LocalDate datePurchase, String status, Librairy librairy, Set<Loan> loans, BookReference bookReference) {
+    public Book(LocalDate datePurchase, Status status, Librairy librairy, Set<Loan> loans, BookReference bookReference) {
         this.datePurchase = datePurchase;
         this.status = status;
         this.librairy = librairy;
@@ -39,10 +42,9 @@ public class Book extends AuditModel {
         this.bookReference = bookReference;
     }
 
-    public Book(){
+    public Book() {
 
     }
-
 
     public int getId() {
         return id;
@@ -60,11 +62,11 @@ public class Book extends AuditModel {
         this.datePurchase = datePurchase;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -92,3 +94,7 @@ public class Book extends AuditModel {
         this.bookReference = bookReference;
     }
 }
+
+
+
+

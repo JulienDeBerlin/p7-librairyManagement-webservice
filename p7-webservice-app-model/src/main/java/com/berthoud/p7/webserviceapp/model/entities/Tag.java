@@ -1,6 +1,7 @@
 package com.berthoud.p7.webserviceapp.model.entities;
 
 import javax.persistence.*;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -47,6 +48,20 @@ public class Tag extends AuditModel{
 
     public void setBookReferences(Set<BookReference> bookReferences) {
         this.bookReferences = bookReferences;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Tag tag = (Tag) o;
+        return name.equals(tag.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }
 

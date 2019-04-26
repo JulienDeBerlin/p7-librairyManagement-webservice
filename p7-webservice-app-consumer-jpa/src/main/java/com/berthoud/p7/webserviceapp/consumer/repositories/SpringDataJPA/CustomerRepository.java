@@ -12,11 +12,11 @@ public interface CustomerRepository extends CrudRepository <Customer, Integer> ,
  List<Customer> findBySurnameIgnoreCase (String surname);
  List<Customer> findByEmailAndPassword(String email, String password);
 
- // here we instead of the findAll in-built method, we use JPQL:
+ // here instead of the findAll in-built method, we use JPQL:
  @Query ("from Customer")
  List <Customer> findAllJPQL();
 
-
+// here we use a JPQL query to look for customers based on their id, firstName and sex
  @Query ("select ce.id, ce.firstName, ce.sex from Customer ce")
  List <Object []> findAllPartialData();
 
