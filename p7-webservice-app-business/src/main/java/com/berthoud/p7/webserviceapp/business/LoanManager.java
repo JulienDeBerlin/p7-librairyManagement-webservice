@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -23,9 +25,9 @@ public class LoanManager {
     LoanDAO loanDAO;
 
 
-    public void extendLoan(int loanId) {
+    public LocalDate extendLoan(int loanId) {
 
-        Optional<Loan> l = loanDAO.findById(106);
+        Optional<Loan> l = loanDAO.findById(loanId);
 
         if (l.isPresent()) {
             Loan loan = l.get();
@@ -34,7 +36,10 @@ public class LoanManager {
                 loan.setNumberExtensions(loan.getNumberExtensions() + 1);
                 loanDAO.save(loan);
             }
+            return loan.getDateEnd();
         }
+
+        throw new NoSuchElementException(loanId + " is not a valid loan id");
     }
 
 }
