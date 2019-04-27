@@ -41,19 +41,6 @@ public class Tests_CustomerManagement {
         Set<Loan> loans = customer1.getLoans();
         loans.forEach(loan -> System.out.println("Titre= " + loan.getBook().getBookReference().getTitle() + "Debut=" + loan.getDateBegin() + "Fin:" + loan.getDateEnd()));
 
-    }
-
-    @Test
-    public void testCreate() {
-        Customer customer = new Customer();
-        customer.setSurname("Pierre");
-        customer.setFirstName("Dubuc");
-        customer.setPassword("soleil");
-        customer.setSex("M");
-        customer.setPhone("0385303955");
-        customer.setEmail("pierre@yahoo.fr");
-
-        customerRepo.save(customer);
 
     }
 }

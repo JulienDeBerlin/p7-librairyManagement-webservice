@@ -7,6 +7,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDate;
+
 import static org.junit.Assert.assertEquals;
 
 
@@ -35,11 +37,16 @@ public class Tests_Config {
         String test = loanLengthInDays;
         assertEquals(test, "28");
 
+        LocalDate testDate = LocalDate.now().plusDays(Integer.parseInt(loanLengthInDays));
+        testDate = testDate.plusDays(1);
+
+
+
         String test2 = extensionLengthInDays;
         assertEquals(test2, "28");
 
         String test3 = maxExtensions;
-        assertEquals(test3, "1");
+        assertEquals(test3, "5");
 
     }
 

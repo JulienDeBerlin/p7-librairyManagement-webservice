@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,26 +75,4 @@ public class Tests_BasicMethodsJPA {
 
     }
 
-
-    @Test
-    public void insertUsers() {
-
-        Customer c1 = new Customer();
-        c1.setSurname("Malika");
-        c1.setFirstName("Djarir");
-        c1.setPassword("soleil");
-        c1.setSex("F");
-        c1.setPhone("0385303955");
-        c1.setEmail("aicha@yahoo.fr");
-
-        Address address = new Address();
-        address.setHouseNumber(13);
-        address.setCity("Paris");
-        address.setZipCode("75009");
-        address.setRoad("rue de Milan");
-
-        c1.setAddress(address);
-
-        customerRepo.save(c1);
-    }
 }

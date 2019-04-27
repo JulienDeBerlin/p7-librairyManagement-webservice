@@ -195,13 +195,5 @@ public class Tests_BookResearch {
         }
     }
 
-    @Test
-    public void testCreateBook() {
-        Book book = new Book();
-        book.setStatus(Book.Status.AVAILABLE);
-        book.setDatePurchase(LocalDate.of(2019, 03, 23));
-        bookRepo.save(book);
-    }
-
 
 }

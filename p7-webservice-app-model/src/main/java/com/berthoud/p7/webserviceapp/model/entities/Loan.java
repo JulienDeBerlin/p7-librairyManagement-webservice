@@ -23,6 +23,7 @@ public class Loan extends AuditModel {
     @Column(nullable = false)
     private LocalDate dateBack;
 
+
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
