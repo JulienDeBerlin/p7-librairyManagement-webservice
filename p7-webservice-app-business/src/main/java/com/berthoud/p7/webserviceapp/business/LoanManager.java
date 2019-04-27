@@ -18,14 +18,14 @@ import java.util.Optional;
 @PropertySource("classpath:settings.properties")
 public class LoanManager {
 
-    @Value("${loanLengthInDays}")
-    static int loanLengthInDays;
+    @Value("{loanLengthInDays}")
+    private String loanLengthInDays;
 
     @Value("${maxExtensions}")
-    static int maxExtensions;
+    private String maxExtensions;
 
     @Value("${extensionLengthInDays}")
-    static int extensionLengthInDays;
+    private String extensionLengthInDays;
 
 
     @Autowired
@@ -56,11 +56,13 @@ public class LoanManager {
             return 0;
         }
 
-        if (loan.getNumberExtensions() < maxExtensions) {
-            loan.setDateEnd(loan.getDateEnd().plusDays(28));
+
+        if (loan.getNumberExtensions() < Integer.parseInt(maxExtensions) ) {
+            loan.setDateEnd(loan.getDateEnd().plusDays(Integer.parseInt(extensionLengthInDays)));
             loan.setNumberExtensions(loan.getNumberExtensions() + 1);
             loanDAO.save(loan);
             return 1;
+
         } else {
             return -1;
         }
@@ -137,7 +139,7 @@ public class LoanManager {
         newloan.setBook(b.get());
         newloan.setNumberExtensions(0);
         newloan.setDateBegin(LocalDate.now());
-        newloan.setDateEnd(LocalDate.now().plusDays(loanLengthInDays));
+        newloan.setDateEnd(LocalDate.now().plusDays(Integer.parseInt(loanLengthInDays)));
         newloan.setDateBack(LocalDate.of(1900, 1, 1));
         loanDAO.save(newloan);
 

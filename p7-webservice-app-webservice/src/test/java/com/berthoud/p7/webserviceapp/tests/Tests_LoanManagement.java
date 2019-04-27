@@ -4,7 +4,6 @@ import com.berthoud.p7.webserviceapp.business.LoanManager;
 import com.berthoud.p7.webserviceapp.consumer.repositories.SpringDataJPA.BookRepository;
 import com.berthoud.p7.webserviceapp.consumer.repositories.SpringDataJPA.CustomerRepository;
 import com.berthoud.p7.webserviceapp.consumer.repositories.SpringDataJPA.LoanRepository;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-
 
 import static org.junit.Assert.assertEquals;
 
@@ -33,16 +31,33 @@ public class Tests_LoanManagement {
     BookRepository bookRepo;
 
 
-
     @Test
-    public void extendLoan(){
-        loanManager.extendLoan(106);
+    @Transactional     /** ...without this annotation, rollback is like false... ! */
+    public void extendLoan() {
+
+        // extension ok
+        int testValue = loanManager.extendLoan(36);
+        assertEquals(testValue, 1);
+
+        // membership expired
+        testValue = loanManager.extendLoan(40);
+        assertEquals(testValue, 0);
+
+        // max amount extension reached
+        testValue = loanManager.extendLoan(106);
+        assertEquals(testValue, -1);
+
+        // loan id not correct
+        testValue = loanManager.extendLoan(1);
+        assertEquals(testValue, -2);
+
+
     }
 
 
-
     @Test
-    public void registerNewLoan(){
+    @Transactional
+    public void registerNewLoan() {
 
         // membership expired
         int testValue = loanManager.registerNewLoan(23, 5);
@@ -77,7 +92,7 @@ public class Tests_LoanManagement {
 
     @Test
     @Transactional
-    public void bookBack(){
+    public void bookBack() {
 
         //book id wrong
         int testValue = loanManager.bookBack(34);
@@ -96,7 +111,6 @@ public class Tests_LoanManagement {
         assertEquals(testValue, 1);
 
     }
-
 
 
 }
