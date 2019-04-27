@@ -22,6 +22,7 @@ public class Customer extends AuditModel{
     @Column(nullable=false)
     private String sex;
 
+    @Column(nullable=false)
     private LocalDate dateExpirationMembership;
     private String phone;
     private String email;

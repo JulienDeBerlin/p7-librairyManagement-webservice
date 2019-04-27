@@ -20,6 +20,7 @@ public class Loan extends AuditModel {
     @Column(nullable = false)
     private int numberExtensions;
 
+    @Column(nullable = false)
     private LocalDate dateBack;
 
     @ManyToOne
