@@ -38,9 +38,9 @@ public class Tests_LoanManagement {
     /** ...without this annotation, rollback is like false... ! */
     public void extendLoan() {
 
-        // extension ok
+        // loan id not correct (no active loan)
         int testValue = loanManager.extendLoan(36);
-        assertEquals(testValue, 1);
+        assertEquals(testValue, -2);
 
         // membership expired
         testValue = loanManager.extendLoan(40);
@@ -108,13 +108,13 @@ public class Tests_LoanManagement {
     public void testMonitoringLoans() {
 
         List<Loan> listLoansLate = loanManager.getOpenLoansLate();
-        assertEquals(listLoansLate.size(), 1);
+        assertEquals(listLoansLate.size(), 2);
 
         List<Loan> listLoansInTime = loanManager.getOpenLoansInTime();
-        assertEquals(listLoansInTime.size(), 2);
+        assertEquals(listLoansInTime.size(), 3);
 
         List<Loan> listAllLoans = loanManager.getAllOpenLoans();
-        assertEquals(listAllLoans.size(), 3);
+        assertEquals(listAllLoans.size(), 5);
     }
 
 
