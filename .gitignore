@@ -112,7 +112,7 @@ modules.xml
 *.rar
 
 target/
-*.lst
+
 
 
 
