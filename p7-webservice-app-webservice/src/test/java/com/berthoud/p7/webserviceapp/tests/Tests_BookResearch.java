@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -183,17 +182,6 @@ public class Tests_BookResearch {
     }
 
 
-    @Test
-    @Transactional
-    public void findBookByTitle() {
-        List<BookReference> bookReferenceList = bookResearchManager.findBookReferenceByTitle("itALie");
-        for (BookReference bookReference : bookReferenceList) {
-            System.out.println(bookReference.getTitle());
-            for (Book book : bookReference.getBooks()) {
-                System.out.println(book.getStatus());
-            }
-        }
-    }
 
 
 }

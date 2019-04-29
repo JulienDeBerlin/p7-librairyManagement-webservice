@@ -4,13 +4,15 @@ import com.berthoud.p7.webserviceapp.business.LoanManager;
 import com.berthoud.p7.webserviceapp.consumer.repositories.SpringDataJPA.BookRepository;
 import com.berthoud.p7.webserviceapp.consumer.repositories.SpringDataJPA.CustomerRepository;
 import com.berthoud.p7.webserviceapp.consumer.repositories.SpringDataJPA.LoanRepository;
+import com.berthoud.p7.webserviceapp.model.entities.Loan;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -32,7 +34,8 @@ public class Tests_LoanManagement {
 
 
     @Test
-    @Transactional     /** ...without this annotation, rollback is like false... ! */
+    @Transactional
+    /** ...without this annotation, rollback is like false... ! */
     public void extendLoan() {
 
         // extension ok
@@ -98,6 +101,20 @@ public class Tests_LoanManagement {
         testValue = loanManager.bookBack(3);
         assertEquals(testValue, 1);
 
+    }
+
+
+    @Test
+    public void testMonitoringLoans() {
+
+        List<Loan> listLoansLate = loanManager.getOpenLoansLate();
+        assertEquals(listLoansLate.size(), 1);
+
+        List<Loan> listLoansInTime = loanManager.getOpenLoansInTime();
+        assertEquals(listLoansInTime.size(), 2);
+
+        List<Loan> listAllLoans = loanManager.getAllOpenLoans();
+        assertEquals(listAllLoans.size(), 3);
     }
 
 
