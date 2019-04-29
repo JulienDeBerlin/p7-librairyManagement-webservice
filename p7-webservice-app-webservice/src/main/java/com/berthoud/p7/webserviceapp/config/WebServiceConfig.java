@@ -40,7 +40,7 @@ import org.springframework.xml.xsd.XsdSchema;
 
         @Bean
         public XsdSchema customersSchema(){
-            return new SimpleXsdSchema(new ClassPathResource("customers.xsd"));
+            return new SimpleXsdSchema(new ClassPathResource("customersAndLoans.xsd"));
         }
 
 
