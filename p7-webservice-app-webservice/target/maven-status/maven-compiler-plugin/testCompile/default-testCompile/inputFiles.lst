@@ -1,1 +1,5 @@
-/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/src/test/java/com/berthoud/p7/webserviceapp/tests/WebserviceAppTests.java
+/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/src/test/java/com/berthoud/p7/webserviceapp/tests/Tests_BookResearch.java
+/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/src/test/java/com/berthoud/p7/webserviceapp/tests/Tests_Config.java
+/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/src/test/java/com/berthoud/p7/webserviceapp/tests/Tests_LoanManagement.java
+/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/src/test/java/com/berthoud/p7/webserviceapp/tests/Tests_CustomerManagement.java
+/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/src/test/java/com/berthoud/p7/webserviceapp/tests/Tests_BasicMethodsJPA.java
