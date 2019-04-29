@@ -9,18 +9,32 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+
+/**
+ * This class is dedicated to the research of books in the catalog of the librairies.
+ * It gathers all methods required for the book research.
+ */
 @Service
 public class BookResearchManager {
 
     @Autowired
     BookReferenceDAO bookReferenceDAO;
 
-
+    /**
+     * This method is use to perform a book research. There are 3 research parameters ( author, title or keywords also called tags)
+     * and 1 filter by librairy. At least 1 research parameter should be indicated otherwise an exception is thrown.
+     *
+     * @param authorSurname research parameter: authorSurname is the exact name of the author, NOT case sensitive
+     * @param titleElement, research parameter: titleElement is the title or part of it, NOT case sensitive
+     * @param librairyId,   filter, librairyId is the ID of the librairy. It the research should be extended to all librairies, use id = -1
+     * @param tags,         research parameter, tags is a list of tags ( 0 to unlimited)
+     * @return a list of BookReference that match with the research-parameters.
+     */
     public List<BookReference> findBookMultiParameters(String authorSurname, String titleElement, int librairyId, List<String> tags) {
 
         List<BookReference> bookReferenceList = new ArrayList<>();
 
-        Set <String> tagsHashSet = convertListStringIntoSetString(tags);
+        Set<String> tagsHashSet = convertListStringIntoSetString(tags);
 
         // 3 parameters
         if (authorSurname != "" && titleElement != "" && !tags.isEmpty()) {
@@ -55,6 +69,14 @@ public class BookResearchManager {
     }
 
 
+    /**
+     * This method takes as input a list of BookReferences and a librairy Id. It checks if the selected librairy owes at least one
+     * book matching with the selected BookReference. If no, the BookReference is sorted out from the list.
+     *
+     * @param bookReferenceList the list of BookReference objects to be filtered
+     * @param librairyId        the id of the selected librairy
+     * @return a list of BookReferences containing only books that can be found in the selected librairy.
+     */
     public List<BookReference> filterBookReferenceListByLibrairy(List<BookReference> bookReferenceList, int librairyId) {
 
         if (librairyId != -1) {
@@ -82,22 +104,29 @@ public class BookResearchManager {
     }
 
 
-    public Set<Tag> convertListStringIntoSetTag(List<String> keywords) {
 
-        Set<Tag> tagHashSet = new HashSet<Tag>();
+//    public Set<Tag> convertListStringIntoSetTag(List<String> keywords) {
+//
+//        Set<Tag> tagHashSet = new HashSet<Tag>();
+//
+//        //create a tag for every keyword of the list:
+//        for (String s : keywords) {
+//            Tag newTag = new Tag();
+//            newTag.setName(s);
+//
+//            // add the tag to the HashSet:
+//            tagHashSet.add(newTag);
+//        }
+//
+//        return tagHashSet;
+//    }
 
-        //create a tag for every keyword of the list:
-        for (String s : keywords) {
-            Tag newTag = new Tag();
-            newTag.setName(s);
 
-            // add the tag to the HashSet:
-            tagHashSet.add(newTag);
-        }
-
-        return tagHashSet;
-    }
-
+    /**
+     * This is a small tool to convert a List of String into a set of strings
+     * @param keywords the list to be converted
+     * @return
+     */
     public Set<String> convertListStringIntoSetString(List<String> keywords) {
         return new HashSet<>(keywords);
     }

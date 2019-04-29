@@ -7,24 +7,32 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
+/**
+ * This class is dedicated to the management of librairy user, called here customers.
+ */
+
 @Service
 public class CustomerManager {
 
     @Autowired
     CustomerDAO customerDAO;
 
-
-    public Customer login (String email, String password){
+    /**
+     * This method is used for the login of a customer.
+     *
+     * @param email    the email of the customer
+     * @param password the password of the customer
+     * @return If the password matches with the email, the corresponding Customer object is returned. Otherwise, null is returned.
+     */
+    public Customer login(String email, String password) {
         List<Customer> customerList = customerDAO.findByEmailAndPassword(email, password);
-        if (customerList.isEmpty()){
+        if (customerList.isEmpty()) {
             return null;
         } else {
             return customerList.get(0);
         }
     }
 
-    public Customer findById(int id){
-       return customerDAO.findById(id).get();
-    }
 
 }
