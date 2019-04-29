@@ -12,6 +12,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -58,7 +60,7 @@ public class LoanManager {
         }
 
 
-        if (loan.getNumberExtensions() < Integer.parseInt(maxExtensions) ) {
+        if (loan.getNumberExtensions() < Integer.parseInt(maxExtensions)) {
             loan.setDateEnd(loan.getDateEnd().plusDays(Integer.parseInt(extensionLengthInDays)));
             loan.setNumberExtensions(loan.getNumberExtensions() + 1);
             loanDAO.save(loan);
@@ -152,6 +154,28 @@ public class LoanManager {
         b.get().setStatus(Book.Status.BORROWED);
         bookDAO.save(b.get());
         return 1;
+    }
+
+
+    public List<Loan> getAllOpenLoans() {
+        List<Loan> allLoans = new ArrayList<>();
+        allLoans.addAll(getOpenLoansInTime());
+        allLoans.addAll(getOpenLoansLate());
+        return allLoans;
+    }
+
+
+    public List<Loan> getOpenLoansInTime() {
+        // DateBack is 01/01/1900 for Loan still open
+        LocalDate back = LocalDate.of(1900, 01, 01);
+        return loanDAO.findByDateBackAndDateEndGreaterThan(back, LocalDate.now());
+    }
+
+
+    public List<Loan> getOpenLoansLate() {
+        // DateBack is 01/01/1900 for Loan still open
+        LocalDate back = LocalDate.of(1900, 01, 01);
+        return loanDAO.findByDateBackAndDateEndLessThanEqual(back, LocalDate.now());
     }
 
 }

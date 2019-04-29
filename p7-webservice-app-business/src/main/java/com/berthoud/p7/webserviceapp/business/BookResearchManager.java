@@ -15,9 +15,6 @@ public class BookResearchManager {
     @Autowired
     BookReferenceDAO bookReferenceDAO;
 
-    public List<BookReference> findBookReferenceByTitle(String titleElement) {
-        return bookReferenceDAO.findByTitleContainsIgnoreCase(titleElement);
-    }
 
     public List<BookReference> findBookMultiParameters(String authorSurname, String titleElement, int librairyId, List<String> tags) {
 
