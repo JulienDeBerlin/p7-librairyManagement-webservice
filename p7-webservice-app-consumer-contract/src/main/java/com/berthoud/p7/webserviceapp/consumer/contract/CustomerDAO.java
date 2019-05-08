@@ -9,6 +9,7 @@ public interface CustomerDAO {
 
     List<Customer> findByEmailAndPassword(String email, String password);
     Optional<Customer> findById(int id);
+    Optional<Customer> findByEmail(String email);
 
 
 }
