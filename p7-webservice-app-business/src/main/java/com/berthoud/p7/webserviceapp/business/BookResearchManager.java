@@ -1,9 +1,10 @@
 package com.berthoud.p7.webserviceapp.business;
 
 import com.berthoud.p7.webserviceapp.consumer.contract.BookReferenceDAO;
+import com.berthoud.p7.webserviceapp.consumer.contract.LibrairyDAO;
 import com.berthoud.p7.webserviceapp.model.entities.Book;
 import com.berthoud.p7.webserviceapp.model.entities.BookReference;
-import com.berthoud.p7.webserviceapp.model.entities.Tag;
+import com.berthoud.p7.webserviceapp.model.entities.Librairy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,9 @@ public class BookResearchManager {
 
     @Autowired
     BookReferenceDAO bookReferenceDAO;
+
+    @Autowired
+    LibrairyDAO librairyDAO;
 
     /**
      * This method is use to perform a book research. There are 3 research parameters ( author, title or keywords also called tags)
@@ -37,25 +41,25 @@ public class BookResearchManager {
         Set<String> tagsHashSet = convertListStringIntoSetString(tags);
 
         // 3 parameters
-        if (authorSurname != "" && titleElement != "" && !tags.isEmpty()) {
+        if (!authorSurname.isEmpty() && !titleElement.isEmpty() && !tags.isEmpty()) {
             bookReferenceList = bookReferenceDAO.findBookReferenceByTagsAndTitleElementAndAuthor(tagsHashSet, tagsHashSet.size(), titleElement, authorSurname);
         }
 
         // 2 parameters
-        else if (authorSurname != "" && titleElement != "" && tags.isEmpty()) {
+        else if (!authorSurname.isEmpty() && !titleElement.isEmpty() && tags.isEmpty()) {
             bookReferenceList = bookReferenceDAO.findByAuthorSurnameAndTitleContainsAllIgnoreCase(authorSurname, titleElement);
-        } else if (authorSurname == "" && titleElement != "" && !tags.isEmpty()) {
+        } else if (authorSurname.isEmpty() && !titleElement.isEmpty() && !tags.isEmpty()) {
             bookReferenceList = bookReferenceDAO.findBookReferenceByTagsAndTitleElement(tagsHashSet, tagsHashSet.size(), titleElement);
-        } else if (authorSurname != "" && titleElement == "" && !tags.isEmpty()) {
+        } else if (!authorSurname.isEmpty() && titleElement.isEmpty() && !tags.isEmpty()) {
             bookReferenceList = bookReferenceDAO.findBookReferenceByTagsAndAuthor(tagsHashSet, tagsHashSet.size(), authorSurname);
         }
 
         // only 1 parameter
-        else if (authorSurname != "" && titleElement == "" && tags.isEmpty()) {
+        else if (!authorSurname.isEmpty() && titleElement.isEmpty() && tags.isEmpty()) {
             bookReferenceList = bookReferenceDAO.findByAuthorSurnameIgnoreCase(authorSurname);
-        } else if (authorSurname == "" && titleElement != "" && tags.isEmpty()) {
+        } else if (authorSurname.isEmpty() && !titleElement.isEmpty() && tags.isEmpty()) {
             bookReferenceList = bookReferenceDAO.findByTitleContainsIgnoreCase(titleElement);
-        } else if (authorSurname == "" && titleElement == "" && !tags.isEmpty()) {
+        } else if (authorSurname.isEmpty() && titleElement.isEmpty() && !tags.isEmpty()) {
             bookReferenceList = bookReferenceDAO.findBookReferenceByTags(tagsHashSet, tagsHashSet.size());
         }
 
@@ -103,27 +107,17 @@ public class BookResearchManager {
         return bookReferenceList;
     }
 
-
-
-//    public Set<Tag> convertListStringIntoSetTag(List<String> keywords) {
-//
-//        Set<Tag> tagHashSet = new HashSet<Tag>();
-//
-//        //create a tag for every keyword of the list:
-//        for (String s : keywords) {
-//            Tag newTag = new Tag();
-//            newTag.setName(s);
-//
-//            // add the tag to the HashSet:
-//            tagHashSet.add(newTag);
-//        }
-//
-//        return tagHashSet;
-//    }
+    /**
+     * @return This method returns a list of all the librairies
+     */
+    public List<Librairy> getAllLibrairies() {
+        return librairyDAO.findAll();
+    }
 
 
     /**
      * This is a small tool to convert a List of String into a set of strings
+     *
      * @param keywords the list to be converted
      * @return
      */

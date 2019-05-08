@@ -1,40 +1,41 @@
 
 package com.berthoud.p7.webserviceapp.model.entities;
 
-        import javax.persistence.*;
-        import java.time.LocalDate;
-        import java.util.Set;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Set;
 
 
 @Entity
-public class Customer extends AuditModel{
+public class Customer extends AuditModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String firstName;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String surname;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String sex;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private LocalDate dateExpirationMembership;
     private String phone;
     private String email;
 
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String password;
 
-    @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn (name = "address")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address")
     private Address address;
 
-    @OneToMany (mappedBy = "customer", cascade = CascadeType.ALL)
+    @OrderBy("dateEnd ASC ")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Loan> loans;
 
     public Customer(String firstName, String surname, String sex, LocalDate dateExpirationMembership, String phone, String email, String password, Address address, Set<Loan> loans) {
@@ -49,7 +50,7 @@ public class Customer extends AuditModel{
         this.loans = loans;
     }
 
-    public Customer(){
+    public Customer() {
 
     }
 

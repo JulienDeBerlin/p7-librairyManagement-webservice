@@ -21,6 +21,24 @@
         </xs:complexType>
     </xs:element>
 
+    <!--customer management-->
+
+    <xs:element name="refreshCustomerRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="email" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="refreshCustomerResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="customer" type="tns:customerWs"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
 
 <!--loan management-->
 

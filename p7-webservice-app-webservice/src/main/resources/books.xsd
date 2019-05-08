@@ -23,6 +23,22 @@
     </xs:element>
 
 
+    <xs:element name="listLibrairyRequest">
+        <xs:complexType>
+            <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="listLibrairyResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="librairyWs" type="tns:librairyWs" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+
     <xs:complexType name="bookReferenceWs">
         <xs:sequence>
             <xs:element name="id" type="xs:int"/>

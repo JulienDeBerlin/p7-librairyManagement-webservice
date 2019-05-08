@@ -3,6 +3,8 @@ package com.berthoud.p7.webserviceapp.endpoints;
 import com.berthoud.p7.webserviceapp.business.BookResearchManager;
 import com.berthoud.p7.webserviceapp.model.entities.Book;
 import com.berthoud.p7.webserviceapp.model.entities.BookReference;
+import com.berthoud.p7.webserviceapp.model.entities.Librairy;
+import com.berthoud.p7.webserviceapp.model.entities.Tag;
 import com.berthoud.p7.webserviceapp.utils.Utils;
 import com.berthoud.p7.webserviceapp.ws.books.*;
 import org.springframework.beans.BeanUtils;
@@ -25,38 +27,53 @@ public class BookEndpoint {
     @Autowired
     private BookResearchManager bookResearchManager;
 
+
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "bookRequest")
     @ResponsePayload
-    public BookResponse getResponse(@RequestPayload BookRequest r) throws DatatypeConfigurationException {
+    public BookResponse getListOfBookReferences(@RequestPayload BookRequest r) throws DatatypeConfigurationException {
         BookResponse response = new BookResponse();
 
         List<BookReference> bookReferenceList =
                 bookResearchManager.findBookMultiParameters(r.getAuthorSurname(), r.getTitleElement(), r.getLibrairyId(), r.getTags());
 
-        for (BookReference b:bookReferenceList) {
+        for (BookReference b : bookReferenceList) {
 
             BookReferenceWs bookReferenceWs = new BookReferenceWs();
 
-            BeanUtils.copyProperties(b,bookReferenceWs);
+            BeanUtils.copyProperties(b, bookReferenceWs);
 
-            for (Book book: b.getBooks() ) {
+            for (Tag tag : b.getTags()) {
+                TagsWs tagsWs = new TagsWs();
+                BeanUtils.copyProperties(tag, tagsWs);
+                bookReferenceWs.getTags().add(tagsWs);
+            }
+
+
+            for (Book book : b.getBooks()) {
                 BookWs bookWs = new BookWs();
-                BeanUtils.copyProperties(book,bookWs);
+                BeanUtils.copyProperties(book, bookWs);
 
                 LibrairyWs librairyWs = new LibrairyWs();
-                BeanUtils.copyProperties(book.getLibrairy(),librairyWs);
+                BeanUtils.copyProperties(book.getLibrairy(), librairyWs);
                 bookWs.setLibrairy(librairyWs);
                 bookWs.setDatePurchase(Utils.convertLocalDateForXml(book.getDatePurchase()));
 
 
                 Book.Status status = book.getStatus();
                 switch (status) {
-                    case AVAILABLE   : bookWs.setStatus(StatusWs.AVAILABLE); break;
-                    case BOOKED      : bookWs.setStatus(StatusWs.BOOKED); break;
-                    case BORROWED    : bookWs.setStatus(StatusWs.BORROWED); break;
+                    case AVAILABLE:
+                        bookWs.setStatus(StatusWs.AVAILABLE);
+                        break;
+                    case BOOKED:
+                        bookWs.setStatus(StatusWs.BOOKED);
+                        break;
+                    case BORROWED:
+                        bookWs.setStatus(StatusWs.BORROWED);
+                        break;
                 }
 
                 bookReferenceWs.getBook().add(bookWs);
+
             }
 
             response.getBookReferences().add(bookReferenceWs);
@@ -65,6 +82,20 @@ public class BookEndpoint {
         return response;
     }
 
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "listLibrairyRequest")
+    @ResponsePayload
+    public ListLibrairyResponse getAllLibrairies(@RequestPayload ListLibrairyRequest r)  {
+        ListLibrairyResponse response = new ListLibrairyResponse();
+
+        List<Librairy> librairyList = bookResearchManager.getAllLibrairies();
+        for (Librairy librairy :librairyList) {
+            LibrairyWs librairyWs = new LibrairyWs();
+            BeanUtils.copyProperties(librairy, librairyWs);
+            response.getLibrairyWs().add(librairyWs);
+        }
+
+        return response;
+    }
 
 
 }
