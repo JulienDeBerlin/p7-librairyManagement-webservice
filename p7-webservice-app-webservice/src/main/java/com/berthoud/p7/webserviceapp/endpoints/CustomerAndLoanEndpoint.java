@@ -2,6 +2,8 @@ package com.berthoud.p7.webserviceapp.endpoints;
 
 import com.berthoud.p7.webserviceapp.business.CustomerManager;
 import com.berthoud.p7.webserviceapp.business.LoanManager;
+import com.berthoud.p7.webserviceapp.business.exceptions.*;
+import com.berthoud.p7.webserviceapp.business.exceptions.ServiceStatus;
 import com.berthoud.p7.webserviceapp.model.entities.Book;
 import com.berthoud.p7.webserviceapp.model.entities.Customer;
 import com.berthoud.p7.webserviceapp.model.entities.Loan;
@@ -26,29 +28,45 @@ import static com.berthoud.p7.webserviceapp.utils.Utils.convertLocalDateForXml;
 public class CustomerAndLoanEndpoint {
     public static final String NAMESPACE_URI = "http://com.berthoud.p7";
 
-    @Autowired
-    private CustomerManager customerManager;
 
     @Autowired
     LoanManager loanManager;
 
+    @Autowired
+    CustomerManager customerManager;
+
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "loginCustomerRequest")
     @ResponsePayload
-    public LoginCustomerResponse loginCustomer(@RequestPayload LoginCustomerRequest request) throws DatatypeConfigurationException {
+    public LoginCustomerResponse loginCustomer(@RequestPayload LoginCustomerRequest request) throws ServiceFaultException, DatatypeConfigurationException {
         LoginCustomerResponse response = new LoginCustomerResponse();
 
         Customer customer = customerManager.login(request.getEmail(), request.getPassword());
-        CustomerWs customerWs = new CustomerWs();
 
-        BeanUtils.copyProperties(customer, customerWs);
-        customerWs.setDateExpirationMembership(convertLocalDateForXml(customer.getDateExpirationMembership()));
 
-        List<Loan> loanList = new ArrayList<>(customer.getLoans());
-        customerWs.getLoans().addAll(loanMapping(loanList));
 
+        CustomerWs customerWs = customerMapping(customer);
         response.setCustomer(customerWs);
+        return response;
+    }
 
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "refreshCustomerRequest")
+    @ResponsePayload
+    public RefreshCustomerResponse refreshCustomer(@RequestPayload RefreshCustomerRequest request) throws Exception {
+        RefreshCustomerResponse response = new RefreshCustomerResponse();
+
+        Customer customer = customerManager.refresh(request.getEmail());
+        if (customer == null){
+            ServiceStatus serviceStatus = new ServiceStatus();
+            serviceStatus.setCode("1");
+            serviceStatus.setDescription("email wrong");
+
+            throw new ServiceFaultException("refresh denied", serviceStatus);
+        }
+
+        CustomerWs customerWs = customerMapping(customer);
+        response.setCustomer(customerWs);
         return response;
     }
 
@@ -123,6 +141,14 @@ public class CustomerAndLoanEndpoint {
     }
 
 
+    /**
+     * This method is used to map a list of Loan object into a list of LoanWs object, LoanWs being the web-service-class
+     * generated automatically by maven based on the xsd file "customersAndLoans.xsd"
+     *
+     * @param loanList the list to be converted
+     * @return a list of LoanWs object
+     * @throws DatatypeConfigurationException
+     */
     private List<LoanWs> loanMapping(List<Loan> loanList) throws DatatypeConfigurationException {
 
         List<LoanWs> loanWsList = new ArrayList<>();
@@ -177,6 +203,25 @@ public class CustomerAndLoanEndpoint {
         return loanWsList;
     }
 
+    /**
+     * This method is used to map a Customer object into a CustomerWs Object.
+     *
+     * @param customer the customer to be converted
+     * @return CustomerWs
+     * @throws DatatypeConfigurationException
+     */
+    private CustomerWs customerMapping(Customer customer) throws DatatypeConfigurationException {
+
+        CustomerWs customerWs = new CustomerWs();
+
+        BeanUtils.copyProperties(customer, customerWs);
+        customerWs.setDateExpirationMembership(convertLocalDateForXml(customer.getDateExpirationMembership()));
+
+        List<Loan> loanList = new ArrayList<>(customer.getLoans());
+        customerWs.getLoans().addAll(loanMapping(loanList));
+
+        return customerWs;
+    }
 }
 
 

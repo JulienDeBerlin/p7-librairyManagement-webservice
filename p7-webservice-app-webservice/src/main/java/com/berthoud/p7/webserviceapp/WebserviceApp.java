@@ -11,10 +11,7 @@ public class WebserviceApp {
 
     public static void main(String[] args) {
         SpringApplication.run(WebserviceApp.class, args);
-
-
     }
-
 
 
 }
