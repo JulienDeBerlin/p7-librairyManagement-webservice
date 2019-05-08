@@ -29,12 +29,29 @@ public class Tests_CustomerManagement {
     @Test
     @Transactional
     public void testLogin() {
-        Customer customer1 = customerManager.login("malika@yahoo.fr", "soleil");
-        assertNotNull(customer1);
+        try {
+            Customer customer1 = customerManager.login("malika@yahoo.fr", "soleil");
+            assertNotNull(customer1);
 
 
 //        Customer customer1 = customerRepo.findById(30).get();
 
+            System.out.println(customer1.getFirstName() + " " + customer1.getSurname() + "  Id=" + customer1.getId());
+            System.out.println(customer1.getAddress().getCity());
+
+            Set<Loan> loans = customer1.getLoans();
+            loans.forEach(loan -> System.out.println("Titre= " + loan.getBook().getBookReference().getTitle() + "Debut=" + loan.getDateBegin() + "Fin:" + loan.getDateEnd()));
+        }catch (Exception e){
+            System.out.println(e);
+        }
+
+    }
+
+
+    @Test
+    @Transactional
+    public void testCustomerRefresh(){
+        Customer customer1 = customerManager.refresh("malika@yahoo.fr");
         System.out.println(customer1.getFirstName() + " " + customer1.getSurname() + "  Id=" + customer1.getId());
         System.out.println(customer1.getAddress().getCity());
 
@@ -42,5 +59,8 @@ public class Tests_CustomerManagement {
         loans.forEach(loan -> System.out.println("Titre= " + loan.getBook().getBookReference().getTitle() + "Debut=" + loan.getDateBegin() + "Fin:" + loan.getDateEnd()));
 
 
+
     }
+
+
 }

@@ -62,8 +62,12 @@ public class Tests_LoanManagement {
     @Transactional
     public void registerNewLoan() {
 
+        // membership expired
+        int testValue = loanManager.registerNewLoan(23, 7);
+        assertEquals(testValue, 0);
+
         // book borrowed
-        int testValue = loanManager.registerNewLoan(23, 4);
+        testValue = loanManager.registerNewLoan(23, 4);
         assertEquals(testValue, -3);
 
         // book booked
@@ -78,9 +82,7 @@ public class Tests_LoanManagement {
         testValue = loanManager.registerNewLoan(85, 7);
         assertEquals(testValue, 1);
 
-        // membership expired
-        testValue = loanManager.registerNewLoan(23, 8);
-        assertEquals(testValue, 0);
+
 
     }
 

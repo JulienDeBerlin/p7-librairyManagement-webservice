@@ -5,6 +5,7 @@ import com.berthoud.p7.webserviceapp.consumer.repositories.SpringDataJPA.BookRef
 import com.berthoud.p7.webserviceapp.consumer.repositories.SpringDataJPA.BookRepository;
 import com.berthoud.p7.webserviceapp.model.entities.Book;
 import com.berthoud.p7.webserviceapp.model.entities.BookReference;
+import com.berthoud.p7.webserviceapp.model.entities.Librairy;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -139,32 +140,40 @@ public class Tests_BookResearch {
     @Transactional
     public void findMultipleParameters() {
 
+        List<BookReference> bookReferenceList10 =
+                bookResearchManager.findBookMultiParameters("Sur", "", -1, Arrays.asList("sport"));
+        assertEquals(bookReferenceList10.size(), 1);
+
+        List<BookReference> bookReferenceLis11 =
+                bookResearchManager.findBookMultiParameters("", "Italie", -1, Arrays.asList("sport"));
+        assertEquals(bookReferenceLis11.size(), 1);
+
         List<BookReference> bookReferenceList =
-                bookResearchManager.findBookMultiParameters("Sur", "Italie", -1, Arrays.asList("Sport", "Aventure", "Ecologie"));
+                bookResearchManager.findBookMultiParameters("Sur", "Italie", -1, Arrays.asList("sport", "aventure", "écologie"));
         assertEquals(bookReferenceList.size(), 1);
 
         List<BookReference> bookReferenceList2 =
-                bookResearchManager.findBookMultiParameters("Sur", "Italie", 1, Arrays.asList("Sport", "Aventure", "Ecologie"));
+                bookResearchManager.findBookMultiParameters("Sur", "Italie", 1, Arrays.asList("sport", "aventure", "écologie"));
         assertEquals(bookReferenceList2.size(), 1);
 
         List<BookReference> bookReferenceList3 =
-                bookResearchManager.findBookMultiParameters("Sur", "Italie", 2, Arrays.asList("Sport", "Aventure", "Ecologie"));
+                bookResearchManager.findBookMultiParameters("Sur", "Italie", 2, Arrays.asList("sport", "aventure", "écologie"));
         assertEquals(bookReferenceList3.size(), 0);
 
         List<BookReference> bookReferenceList4 =
-                bookResearchManager.findBookMultiParameters("sur", "Italie", -1, Arrays.asList("Sport", "Aventure", "Ecologie"));
+                bookResearchManager.findBookMultiParameters("sur", "Italie", -1, Arrays.asList("sport", "aventure", "écologie"));
         assertEquals(bookReferenceList4.size(), 1);
 
         List<BookReference> bookReferenceList5 =
-                bookResearchManager.findBookMultiParameters("Sur", "Ital", -1, Arrays.asList("Sport", "Aventure", "Ecologie"));
+                bookResearchManager.findBookMultiParameters("Sur", "Ital", -1, Arrays.asList("sport", "aventure", "écologie"));
         assertEquals(bookReferenceList5.size(), 1);
 
         List<BookReference> bookReferenceList6 =
-                bookResearchManager.findBookMultiParameters("Su", "Italie", -1, Arrays.asList("Sport", "Aventure", "Ecologie"));
+                bookResearchManager.findBookMultiParameters("Su", "Italie", -1, Arrays.asList("sport", "aventure", "écologie"));
         assertEquals(bookReferenceList6.size(), 0);
 
         List<BookReference> bookReferenceList7 =
-                bookResearchManager.findBookMultiParameters("Sur", "Italie", -1, Arrays.asList("Sport", "Ecologie", "Ecologie"));
+                bookResearchManager.findBookMultiParameters("Sur", "Italie", -1, Arrays.asList("sport", "écologie", "écologie"));
         assertEquals(bookReferenceList7.size(), 1);
 
         List<BookReference> bookReferenceList8 =
@@ -172,15 +181,17 @@ public class Tests_BookResearch {
         assertEquals(bookReferenceList8.size(), 3);
 
         List<BookReference> bookReferenceList9 =
-                bookResearchManager.findBookMultiParameters("", "", -1, Arrays.asList("Architecture"));
+                bookResearchManager.findBookMultiParameters("", "", -1, Arrays.asList("architecture"));
         assertEquals(bookReferenceList9.size(), 2);
-
-        List<BookReference> bookReferenceList10 =
-                bookResearchManager.findBookMultiParameters("Sur", "", -1, Arrays.asList());
-        assertEquals(bookReferenceList10.size(), 1);
 
     }
 
+
+    @Test
+    public void findAllLibrairies(){
+        List<Librairy> librairyList = bookResearchManager.getAllLibrairies();
+        assertEquals(librairyList.size(), 3);
+    }
 
 
 

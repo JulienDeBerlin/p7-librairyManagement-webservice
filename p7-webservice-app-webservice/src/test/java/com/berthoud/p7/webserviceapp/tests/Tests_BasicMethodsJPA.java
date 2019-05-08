@@ -32,6 +32,7 @@ public class Tests_BasicMethodsJPA {
 
 
     @Test
+    // no @Transactional required here
     public void testUpdate() {
         Optional<Customer> customer = customerRepo.findById(23);
         if (customer.isPresent()) {
