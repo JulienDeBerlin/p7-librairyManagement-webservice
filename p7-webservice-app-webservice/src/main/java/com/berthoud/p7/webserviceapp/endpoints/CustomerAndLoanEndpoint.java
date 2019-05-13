@@ -128,12 +128,25 @@ public class CustomerAndLoanEndpoint {
     }
 
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getOpenLoansLateRequest")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getOpenLoansLateResponse")
     @ResponsePayload
     public GetOpenLoansLateResponse getOpenLoansLate(@RequestPayload GetOpenLoansLateRequest request) throws DatatypeConfigurationException {
 
         GetOpenLoansLateResponse response = new GetOpenLoansLateResponse();
         List<Loan> loanList = loanManager.getOpenLoansLate();
+
+        response.getLoans().addAll(loanMapping(loanList));
+
+        return response;
+    }
+
+
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getOpenLoansLateRequest")
+    @ResponsePayload
+    public GetOpenLoansExtendedResponse getOpenLoansExtented(@RequestPayload GetOpenLoansExtendedRequest request) throws DatatypeConfigurationException {
+
+        GetOpenLoansExtendedResponse response = new GetOpenLoansExtendedResponse();
+        List<Loan> loanList = loanManager.getOpenLoansExtended();
 
         response.getLoans().addAll(loanMapping(loanList));
 

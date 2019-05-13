@@ -220,5 +220,17 @@ public class LoanManager {
         return loanDAO.findByDateBackAndDateEndLessThanEqual(back, LocalDate.now());
     }
 
+
+
+    /**
+     * This method is used for the loan monitoring.
+     *
+     * @return a list of the open loans that has already been extended at least once.
+     */
+    public List<Loan> getOpenLoansExtended(){
+        LocalDate back = LocalDate.of(1900, 01, 01);
+        return  loanDAO.findByDateBackAndNumberExtensionsGreaterThan(back, 0);
+    }
+
 }
 

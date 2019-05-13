@@ -13,6 +13,7 @@ com/berthoud/p7/webserviceapp/ws/books/ListLibrairyResponse.class
 com/berthoud/p7/webserviceapp/ws/books/package-info.class
 com/berthoud/p7/webserviceapp/ws/customers/BookReferenceWs.class
 com/berthoud/p7/webserviceapp/ws/customers/GetOpenLoansLateResponse.class
+com/berthoud/p7/webserviceapp/ws/customers/GetOpenLoansExtendedResponse.class
 com/berthoud/p7/webserviceapp/ws/books/StatusWs.class
 com/berthoud/p7/webserviceapp/ws/customers/ExtendLoanResponse.class
 com/berthoud/p7/webserviceapp/endpoints/CustomerAndLoanEndpoint$1.class
@@ -37,6 +38,7 @@ com/berthoud/p7/webserviceapp/endpoints/BookEndpoint.class
 com/berthoud/p7/webserviceapp/ws/customers/RegisterLoanRequest.class
 com/berthoud/p7/webserviceapp/ws/customers/package-info.class
 com/berthoud/p7/webserviceapp/config/WebServiceConfig.class
+com/berthoud/p7/webserviceapp/ws/customers/GetOpenLoansExtendedRequest.class
 com/berthoud/p7/webserviceapp/ws/customers/LoanWs.class
 com/berthoud/p7/webserviceapp/ws/customers/StatusWs.class
 com/berthoud/p7/webserviceapp/endpoints/CustomerAndLoanEndpoint.class

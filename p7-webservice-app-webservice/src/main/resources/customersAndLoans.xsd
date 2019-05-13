@@ -145,6 +145,22 @@
         </xs:complexType>
     </xs:element>
 
+    <!--monitoring loans (extended)-->
+    <xs:element name="getOpenLoansExtendedRequest">
+        <xs:complexType>
+            <xs:sequence>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getOpenLoansExtendedResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="loans" type="tns:loanWs" maxOccurs="unbounded" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
 
 
 <!--definition complexe types-->

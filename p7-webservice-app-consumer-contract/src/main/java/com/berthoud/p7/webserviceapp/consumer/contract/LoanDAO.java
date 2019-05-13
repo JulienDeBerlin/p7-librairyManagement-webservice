@@ -16,5 +16,6 @@ public interface LoanDAO {
 
     List<Loan> findByDateBackAndDateEndLessThanEqual (LocalDate back, LocalDate now );
 
+    List<Loan> findByDateBackAndNumberExtensionsGreaterThan(LocalDate back, int amount);
 
 }

@@ -11,6 +11,7 @@
 /Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/target/generated-sources/jaxb/com/berthoud/p7/webserviceapp/ws/customers/LoginCustomerRequest.java
 /Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/target/generated-sources/jaxb/com/berthoud/p7/webserviceapp/ws/customers/RefreshCustomerRequest.java
 /Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/target/generated-sources/jaxb/com/berthoud/p7/webserviceapp/ws/customers/RegisterBookReturnResponse.java
+/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/target/generated-sources/jaxb/com/berthoud/p7/webserviceapp/ws/customers/GetOpenLoansExtendedResponse.java
 /Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/target/generated-sources/jaxb/com/berthoud/p7/webserviceapp/ws/books/BookRequest.java
 /Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/target/generated-sources/jaxb/com/berthoud/p7/webserviceapp/ws/customers/package-info.java
 /Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/target/generated-sources/jaxb/com/berthoud/p7/webserviceapp/ws/books/BookWs.java
@@ -22,6 +23,7 @@
 /Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/src/main/java/com/berthoud/p7/webserviceapp/WebserviceApp.java
 /Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/target/generated-sources/jaxb/com/berthoud/p7/webserviceapp/ws/customers/GetAllOpenLoansResponse.java
 /Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/src/main/java/com/berthoud/p7/webserviceapp/endpoints/CustomerAndLoanEndpoint.java
+/Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/target/generated-sources/jaxb/com/berthoud/p7/webserviceapp/ws/customers/GetOpenLoansExtendedRequest.java
 /Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/src/main/java/com/berthoud/p7/webserviceapp/endpoints/BookEndpoint.java
 /Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/src/main/java/com/berthoud/p7/webserviceapp/config/WebServiceConfig.java
 /Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/target/generated-sources/jaxb/com/berthoud/p7/webserviceapp/ws/books/BookResponse.java
