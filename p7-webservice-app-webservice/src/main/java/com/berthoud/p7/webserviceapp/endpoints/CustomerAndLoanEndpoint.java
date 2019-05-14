@@ -128,7 +128,7 @@ public class CustomerAndLoanEndpoint {
     }
 
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getOpenLoansLateResponse")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getOpenLoansLateRequest")
     @ResponsePayload
     public GetOpenLoansLateResponse getOpenLoansLate(@RequestPayload GetOpenLoansLateRequest request) throws DatatypeConfigurationException {
 
@@ -141,7 +141,7 @@ public class CustomerAndLoanEndpoint {
     }
 
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getOpenLoansLateRequest")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getOpenLoansExtendedRequest")
     @ResponsePayload
     public GetOpenLoansExtendedResponse getOpenLoansExtented(@RequestPayload GetOpenLoansExtendedRequest request) throws DatatypeConfigurationException {
 
