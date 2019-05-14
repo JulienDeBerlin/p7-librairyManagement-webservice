@@ -126,6 +126,22 @@
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
+
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                            <configuration>
+                                <classifier>spring-boot</classifier>
+                                <mainClass>
+                                    com.berthoud.p7.webserviceapp.WebserviceApp
+                                </mainClass>
+                            </configuration>
+                        </execution>
+                    </executions>
+
+
                 </plugin>
 
                 <plugin>
@@ -162,6 +178,7 @@
                             <configuration>
                                 <sources>
                                     <source>
+                                        <!--${project.basedir}/src/main/resources/books.xsd-->
                                         /Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/src/main/resources/books.xsd
                                     </source>
                                 </sources>
