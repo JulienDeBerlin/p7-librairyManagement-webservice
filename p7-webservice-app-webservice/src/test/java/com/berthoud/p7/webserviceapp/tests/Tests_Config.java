@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 
 
 @RunWith(SpringRunner.class)
-@PropertySource("classpath:settings.properties")
+@PropertySource("classpath:application.properties")
 @SpringBootTest
 public class Tests_Config {
 
