@@ -23,7 +23,7 @@ import java.util.Optional;
 
 
 @Service
-@PropertySource("classpath:settings.properties")
+@PropertySource("classpath:application.properties")
 public class LoanManager {
 
 
