@@ -82,7 +82,7 @@ you try to run the JAR with Java 9 or more. It is also greatly recommended to ru
 
 3/ build the project with Maven ( "mvn package" in the parent maven module). A runnable jar will be created in the target folder of the module "p7-webservice-app-webservice". 
 
-4/ in the same target folder in the subfolder classes, you will find the application.properties files. Open this file and declare your database setting by overriding the values. 
+4/ in the same target folder, in the subfolder "classes", you will find the application.properties files. Open this file and declare your database setting by overriding the values. 
 
 5/ you can now run the jar in the terminal. Don't forget to point to the updated properties file in the command. For instance: 
 
