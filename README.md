@@ -5,11 +5,12 @@
 ### **Presentation**
 
 This application is the 7th project of the [Openclassrooms JAVA learning path](https://openclassrooms.com/en/paths/88-developpeur-dapplication-java).
-This project is about developing the new IT system of a public librairies network. It includes a webapp for the users to perform book research and extend loans. 
-This app is also planned to be released later as a mobile version (ios and android). Further another app will enable the librairy staff to perfom the loan and user management. 
-At least the sending of reminder emails for overdue books will be automised with a batch application. 
+This project is about developing the new IT system of a public librairies network. 
+It includes 1/a webapp for the users to perform book research and extend loans and 2/a batch which automate the sending of reminder emails for overdue books.
 
-The architecture choosen for this system is a Service Orientated Architecture: the business logic and the data layer will be performed by a SOAP web service and all above mentionned apps consume data from this webservice. 
+The web app is also planned to be later released as a mobile version (ios and android). Further, another app will enable the librairy staff to perfom the loan and user management. 
+
+The architecture choosen for this system is a Service Orientated Architecture: the business logic and the data layer are performed by a SOAP web service and all above mentionned apps consume or will consume data from this webservice. 
 
 **Warning: this repo contains only the webservice!**
 [Click here to move to the repo of the webapp and the batch](https://github.com/JulienDeBerlin/p7-librairyManagement-webapp)
