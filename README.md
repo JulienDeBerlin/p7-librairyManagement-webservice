@@ -64,13 +64,13 @@ Though the meaning of these codes can easily be found in the javadoc, here below
 
 
 ### **Configuration and stack**
-* This application is a multi-module **Maven Spring Boot 2** project. The bytecode is compatible with **Java 8**. 
+* This application is a multi-module **Maven Spring Boot 2** project.
 * It embarks a **Tomcat server 9.0.17**
 * The database used in developement is **PostgreSQL 9.6.** 
 * the data layer is managed with **Spring Data / Hibernate**
 * the creation of the webservice uses **Spring WS and the jaxb maven plugin**. 
 
-**Warning: this webservice has been develop with and for Java 8. As Jaxb is not fully compatible with more recent version, you might experience troubles if
+**Warning: this webservice has been developped with and for Java 8. As Jaxb is not fully compatible with more recent version, you might experience troubles if
 you try to run the JAR with Java 9 or more. It is also greatly recommended to run it with Java 8. For more infos on this issue, [click here.](https://www.jesperdj.com/2018/09/30/jaxb-on-java-9-10-11-and-beyond/)**
 
 
