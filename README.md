@@ -6,7 +6,7 @@
 
 This application is the 7th project of the [Openclassrooms JAVA learning path](https://openclassrooms.com/en/paths/88-developpeur-dapplication-java).
 This project is about developing the new IT system of a public librairies network. 
-It includes 1/a webapp for the users to perform book research and extend loans and 2/a batch which automate the sending of reminder emails for overdue books.
+It includes 1/a webapp for the users to perform book research and extend loans and 2/a batch which automates the sending of reminder emails for overdue books.
 
 The web app is also planned to be later released as a mobile version (ios and android). Further, another app will enable the librairy staff to perfom the loan and user management. 
 
