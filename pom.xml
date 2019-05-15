@@ -160,7 +160,7 @@
                             <configuration>
                                 <sources>
                                     <source>
-                                        /Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/src/main/resources/customersAndLoans.xsd
+                                        ${project.basedir}/src/main/resources/customersAndLoans.xsd
                                     </source>
                                 </sources>
                                 <packageName>com.berthoud.p7.webserviceapp.ws.customers</packageName>
@@ -178,8 +178,7 @@
                             <configuration>
                                 <sources>
                                     <source>
-                                        <!--${project.basedir}/src/main/resources/books.xsd-->
-                                        /Users/admin/Documents/PROGRAMMING/OPENCLASSROOMS/P7/Apps_P7/WebserviceApp/p7-webservice-app-webservice/src/main/resources/books.xsd
+                                        ${project.basedir}/src/main/resources/books.xsd
                                     </source>
                                 </sources>
                                 <packageName>com.berthoud.p7.webserviceapp.ws.books</packageName>
