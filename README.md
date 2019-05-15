@@ -5,11 +5,12 @@
 ### **Presentation**
 
 This application is the 7th project of the [Openclassrooms JAVA learning path](https://openclassrooms.com/en/paths/88-developpeur-dapplication-java).
-This project is about developing the new IT system of a public librairies network. It includes a webapp for the users to perform book research and extend loans. 
-This app is also planned to be released later as a mobile version (ios and android). Further another app will enable the librairy staff to perfom the loan and user management. 
-At least the sending of reminder emails for overdue books will be automised with a batch application. 
+This project is about developing the new IT system of a public librairies network. 
+It includes 1/a webapp for the users to perform book research and extend loans and 2/a batch which automates the sending of reminder emails for overdue books.
 
-The architecture choosen for this system is a Service Orientated Architecture: the business logic and the data layer will be performed by a SOAP web service and all above mentionned apps consume data from this webservice. 
+The web app is also planned to be later released as a mobile version (ios and android). Further, another app will enable the librairy staff to perfom the loan and user management. 
+
+The architecture choosen for this system is a Service Orientated Architecture: the business logic and the data layer are performed by a SOAP web service and all above mentionned apps consume or will consume data from this webservice. 
 
 **Warning: this repo contains only the webservice!**
 [Click here to move to the repo of the webapp and the batch](https://github.com/JulienDeBerlin/p7-librairyManagement-webapp)
@@ -63,13 +64,13 @@ Though the meaning of these codes can easily be found in the javadoc, here below
 
 
 ### **Configuration and stack**
-* This application is a multi-module **Maven Spring Boot 2** project. The bytecode is compatible with **Java 8**. 
+* This application is a multi-module **Maven Spring Boot 2** project.
 * It embarks a **Tomcat server 9.0.17**
 * The database used in developement is **PostgreSQL 9.6.** 
 * the data layer is managed with **Spring Data / Hibernate**
 * the creation of the webservice uses **Spring WS and the jaxb maven plugin**. 
 
-**Warning: this webservice has been develop with and for Java 8. As Jaxb is not fully compatible with more recent version, you might experience troubles if
+**Warning: this webservice has been developped with and for Java 8. As Jaxb is not fully compatible with more recent version, you might experience troubles if
 you try to run the JAR with Java 9 or more. It is also greatly recommended to run it with Java 8. For more infos on this issue, [click here.](https://www.jesperdj.com/2018/09/30/jaxb-on-java-9-10-11-and-beyond/)**
 
 
@@ -81,7 +82,7 @@ you try to run the JAR with Java 9 or more. It is also greatly recommended to ru
 
 3/ build the project with Maven ( "mvn package" in the parent maven module). A runnable jar will be created in the target folder of the module "p7-webservice-app-webservice". 
 
-4/ in the same target folder in the subfolder classes, you will find the application.properties files. Open this file and declare your database setting by overriding the values. 
+4/ in the same target folder, in the subfolder "classes", you will find the application.properties file. Open this file and declare your database setting by overriding the values. 
 
 5/ you can now run the jar in the terminal. Don't forget to point to the updated properties file in the command. For instance: 
 
