@@ -18,12 +18,12 @@ The architecture choosen for this system is a Service Orientated Architecture: t
 
 ### **Features**
 
-**Book research:**
+**Book research (managed by wsdl "books") :**
 * resarch of book based on criteria such as author's name, book title (or part of it) and/or keyword. At least one of this criteria is required to perform
 the research. The criteria can also be combined. 
 * indication of the amount of books available with location
 
-**Loan and customer management:**
+**Loan and customer management (managed by wsdl "customersAndLoans") :**
 * login a user
 * refresh a user
 * register a new loan
