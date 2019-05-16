@@ -46,7 +46,7 @@ public class Tests_Config {
         assertEquals(test2, "28");
 
         String test3 = maxExtensions;
-        assertEquals(test3, "5");
+        assertEquals(test3, "1");
 
     }
 
