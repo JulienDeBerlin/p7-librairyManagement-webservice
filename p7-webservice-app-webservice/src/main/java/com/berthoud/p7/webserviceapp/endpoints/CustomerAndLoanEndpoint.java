@@ -1,5 +1,6 @@
 package com.berthoud.p7.webserviceapp.endpoints;
 
+import com.berthoud.p7.webserviceapp.WebserviceApp;
 import com.berthoud.p7.webserviceapp.business.CustomerManager;
 import com.berthoud.p7.webserviceapp.business.LoanManager;
 import com.berthoud.p7.webserviceapp.business.exceptions.*;
@@ -39,6 +40,8 @@ public class CustomerAndLoanEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "loginCustomerRequest")
     @ResponsePayload
     public LoginCustomerResponse loginCustomer(@RequestPayload LoginCustomerRequest request) throws ServiceFaultException, DatatypeConfigurationException {
+
+        WebserviceApp.logger.trace("SOAP call loginCustomerRequest");
         LoginCustomerResponse response = new LoginCustomerResponse();
 
         Customer customer = customerManager.login(request.getEmail(), request.getPassword());
@@ -54,6 +57,10 @@ public class CustomerAndLoanEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "refreshCustomerRequest")
     @ResponsePayload
     public RefreshCustomerResponse refreshCustomer(@RequestPayload RefreshCustomerRequest request) throws Exception {
+
+        WebserviceApp.logger.trace("SOAP call refreshCustomerRequest");
+
+
         RefreshCustomerResponse response = new RefreshCustomerResponse();
 
         Customer customer = customerManager.refresh(request.getEmail());
@@ -74,6 +81,7 @@ public class CustomerAndLoanEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "extendLoanRequest")
     @ResponsePayload
     public ExtendLoanResponse extendLoan(@RequestPayload ExtendLoanRequest request) {
+        WebserviceApp.logger.trace("SOAP call extendLoanRequest");
 
         ExtendLoanResponse response = new ExtendLoanResponse();
         int resultCode = loanManager.extendLoan(request.getLoanId());
@@ -84,6 +92,7 @@ public class CustomerAndLoanEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "registerLoanRequest")
     @ResponsePayload
     public RegisterLoanResponse registerLoan(@RequestPayload RegisterLoanRequest request) {
+        WebserviceApp.logger.trace("SOAP call registerLoanRequest");
 
         RegisterLoanResponse response = new RegisterLoanResponse();
         int resultCode = loanManager.registerNewLoan(request.getCustomerId(), request.getBookId());
@@ -94,6 +103,7 @@ public class CustomerAndLoanEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "registerBookReturnRequest")
     @ResponsePayload
     public RegisterBookReturnResponse registerBookBack(@RequestPayload RegisterBookReturnRequest request) {
+        WebserviceApp.logger.trace("SOAP call registerBookReturnRequest");
 
         RegisterBookReturnResponse response = new RegisterBookReturnResponse();
         int resultCode = loanManager.bookBack(request.getBookId());
@@ -105,6 +115,7 @@ public class CustomerAndLoanEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAllOpenLoansRequest")
     @ResponsePayload
     public GetAllOpenLoansResponse getAllOpenLoans(@RequestPayload GetAllOpenLoansRequest request) throws DatatypeConfigurationException {
+        WebserviceApp.logger.trace("SOAP call getAllOpenLoansRequest");
 
         GetAllOpenLoansResponse response = new GetAllOpenLoansResponse();
         List<Loan> loanList = loanManager.getAllOpenLoans();
@@ -118,6 +129,7 @@ public class CustomerAndLoanEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getOpenLoansInTimeRequest")
     @ResponsePayload
     public GetOpenLoansInTimeResponse getOpenLoansInTime(@RequestPayload GetOpenLoansInTimeRequest request) throws DatatypeConfigurationException {
+        WebserviceApp.logger.trace("SOAP call getOpenLoansInTimeRequest");
 
         GetOpenLoansInTimeResponse response = new GetOpenLoansInTimeResponse();
         List<Loan> loanList = loanManager.getOpenLoansInTime();
@@ -131,6 +143,7 @@ public class CustomerAndLoanEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getOpenLoansLateRequest")
     @ResponsePayload
     public GetOpenLoansLateResponse getOpenLoansLate(@RequestPayload GetOpenLoansLateRequest request) throws DatatypeConfigurationException {
+        WebserviceApp.logger.trace("SOAP call getOpenLoansLateRequest");
 
         GetOpenLoansLateResponse response = new GetOpenLoansLateResponse();
         List<Loan> loanList = loanManager.getOpenLoansLate();
@@ -144,6 +157,7 @@ public class CustomerAndLoanEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getOpenLoansExtendedRequest")
     @ResponsePayload
     public GetOpenLoansExtendedResponse getOpenLoansExtented(@RequestPayload GetOpenLoansExtendedRequest request) throws DatatypeConfigurationException {
+        WebserviceApp.logger.trace("SOAP call getOpenLoansExtendedRequest");
 
         GetOpenLoansExtendedResponse response = new GetOpenLoansExtendedResponse();
         List<Loan> loanList = loanManager.getOpenLoansExtended();
@@ -163,6 +177,8 @@ public class CustomerAndLoanEndpoint {
      * @throws DatatypeConfigurationException
      */
     private List<LoanWs> loanMapping(List<Loan> loanList) throws DatatypeConfigurationException {
+        WebserviceApp.logger.trace("entering method loanMapping()");
+
 
         List<LoanWs> loanWsList = new ArrayList<>();
 
@@ -224,6 +240,7 @@ public class CustomerAndLoanEndpoint {
      * @throws DatatypeConfigurationException
      */
     private CustomerWs customerMapping(Customer customer) throws DatatypeConfigurationException {
+        WebserviceApp.logger.trace("entering method customerMapping()");
 
         CustomerWs customerWs = new CustomerWs();
 

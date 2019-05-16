@@ -63,15 +63,20 @@ public class LoanManager {
      * -2 = failure (loanId not correct)
      */
     public int extendLoan(int loanId) {
+        BusinessLogger.logger.trace("entering method extendLoan with param loanId = " + loanId);
 
         Optional<Loan> l = loanDAO.findById(loanId);
         if (!l.isPresent() || !l.get().getBook().getStatus().equals(Book.Status.BORROWED)) {
+            BusinessLogger.logger.info("failure loan extension, cause: loanId " +loanId +" not correct ");
+
             return -2;
         }
 
         Loan loan = l.get();
 
         if (loan.getCustomer().getDateExpirationMembership().isBefore(LocalDate.now())) {
+            BusinessLogger.logger.info("failure loan extension, cause: membership expired for customer with id " + loan.getCustomer().getId());
+
             return 0;
         }
 
@@ -80,10 +85,14 @@ public class LoanManager {
             loan.setDateEnd(loan.getDateEnd().plusDays(Integer.parseInt(extensionLengthInDays)));
             loan.setNumberExtensions(loan.getNumberExtensions() + 1);
             loanDAO.save(loan);
+            BusinessLogger.logger.info(" loan extension successfull ");
+
             return 1;
 
         } else {
+            BusinessLogger.logger.info("failure loan extension, cause: max amount of extensions reached for loan id " + loanId);
             return -1;
+
         }
     }
 
@@ -95,7 +104,7 @@ public class LoanManager {
      * - the book is available
      * - id of customer and id of book are correct.
      *
-     * @param CustomerId the id of the customer who want to borrow the book
+     * @param customerId the id of the customer who want to borrow the book
      * @param bookId     the id of the book wished by the customer
      * @return :
      * 1 = success (loan is possible and registered),
@@ -104,26 +113,31 @@ public class LoanManager {
      * -2 = failure (customer Id not correct),
      * -3 = failure (book not available)
      */
-    public int registerNewLoan(int CustomerId, int bookId) {
+    public int registerNewLoan(int customerId, int bookId) {
+        BusinessLogger.logger.trace("entering method registerNewLoan with param CustomerId= "+ customerId+ " and bookId= " + bookId);
 
         Optional<Book> b = bookDAO.findById(bookId);
         if (!b.isPresent()) {
+            BusinessLogger.logger.info("failure registration new loan, cause: bookId " + bookId+ " not correct ");
             return -1;
-//            throw new NoSuchElementException(bookId + " is not a valid book id");
         }
 
         if (!b.get().getStatus().equals(Book.Status.AVAILABLE)) {
+            BusinessLogger.logger.info("failure registration new loan, cause: book with id" + bookId+ " not available ");
+
             return -3;
         }
 
 
-        Optional<Customer> c = customerDAO.findById(CustomerId);
+        Optional<Customer> c = customerDAO.findById(customerId);
         if (!c.isPresent()) {
+            BusinessLogger.logger.info("failure registration new loan, cause: customer id " + customerId+ "not correct ");
             return -2;
-//            throw new NoSuchElementException(CustomerId + " is not a valid customer id");
         }
 
         if (c.get().getDateExpirationMembership().isBefore(LocalDate.now())) {
+            BusinessLogger.logger.info("failure registration new loan, cause: membership expired for customer id " + customerId);
+
             return 0;
         }
 
@@ -144,6 +158,8 @@ public class LoanManager {
         // change book status
         b.get().setStatus(Book.Status.BORROWED);
         bookDAO.save(b.get());
+        BusinessLogger.logger.info("registration new loan successfull");
+
         return 1;
     }
 
@@ -159,14 +175,19 @@ public class LoanManager {
      */
 
     public int bookBack(int bookId) {
+        BusinessLogger.logger.trace("entering method bookBack with param bookId =" + bookId);
 
         Optional<Book> b = bookDAO.findById(bookId);
         if (!b.isPresent()) {
+            BusinessLogger.logger.info(" failure registration book return, cause: bookId "+bookId + " is not valid ");
+
             return -1;
         }
 
         Book book = b.get();
         if (!book.getStatus().equals(Book.Status.BORROWED)) {
+            BusinessLogger.logger.info(" failure registration book return, cause: no loan active for book with id "+bookId);
+
             return 0;
         }
 
@@ -182,6 +203,8 @@ public class LoanManager {
                 break;
             }
         }
+        BusinessLogger.logger.info(" registration book return, bookId "+bookId + " was successfull");
+
         return 1;
     }
 
@@ -192,6 +215,8 @@ public class LoanManager {
      * @return a list of all still open loans.
      */
     public List<Loan> getAllOpenLoans() {
+        BusinessLogger.logger.trace("entering getAllOpenLoans() ");
+
         List<Loan> allLoans = new ArrayList<>();
         allLoans.addAll(getOpenLoansInTime());
         allLoans.addAll(getOpenLoansLate());
@@ -204,6 +229,8 @@ public class LoanManager {
      * @return a list of the open loans for which the return deadline has not been reached yet.
      */
     public List<Loan> getOpenLoansInTime() {
+        BusinessLogger.logger.trace("entering getOpenLoansInTime() ");
+
         // DateBack is 01/01/1900 for Loan still open
         LocalDate back = LocalDate.of(1900, 01, 01);
         return loanDAO.findByDateBackAndDateEndGreaterThan(back, LocalDate.now());
@@ -215,6 +242,8 @@ public class LoanManager {
      * @return a list of the open loans for which the return deadline has been reached.
      */
     public List<Loan> getOpenLoansLate() {
+        BusinessLogger.logger.trace("entering getOpenLoansLate() ");
+
         // DateBack is 01/01/1900 for Loan still open
         LocalDate back = LocalDate.of(1900, 01, 01);
         return loanDAO.findByDateBackAndDateEndLessThanEqual(back, LocalDate.now());
@@ -228,6 +257,8 @@ public class LoanManager {
      * @return a list of the open loans that has already been extended at least once.
      */
     public List<Loan> getOpenLoansExtended(){
+        BusinessLogger.logger.trace("entering getOpenLoansExtended()");
+
         LocalDate back = LocalDate.of(1900, 01, 01);
         return  loanDAO.findByDateBackAndNumberExtensionsGreaterThan(back, 0);
     }

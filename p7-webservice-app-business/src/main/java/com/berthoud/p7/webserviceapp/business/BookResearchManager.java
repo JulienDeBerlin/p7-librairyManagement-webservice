@@ -35,6 +35,10 @@ public class BookResearchManager {
      * @return a list of BookReference that match with the research-parameters.
      */
     public List<BookReference> findBookMultiParameters(String authorSurname, String titleElement, int librairyId, List<String> tags) {
+        BusinessLogger.logger.trace("entering method findBookMultiParameters with param authorSurname = " + authorSurname + " , titleElement= " +titleElement+ " , librairyId= " + librairyId);
+        for (String tag:tags) {
+        }
+        BusinessLogger.logger.trace("tag= " +tags);
 
         List<BookReference> bookReferenceList = new ArrayList<>();
 
@@ -63,11 +67,6 @@ public class BookResearchManager {
             bookReferenceList = bookReferenceDAO.findBookReferenceByTags(tagsHashSet, tagsHashSet.size());
         }
 
-        // 0 parameter
-        else {
-            // THROW EXCEPTION
-        }
-
         // Filter through librairy
         return filterBookReferenceListByLibrairy(bookReferenceList, librairyId);
     }
@@ -82,6 +81,7 @@ public class BookResearchManager {
      * @return a list of BookReferences containing only books that can be found in the selected librairy.
      */
     public List<BookReference> filterBookReferenceListByLibrairy(List<BookReference> bookReferenceList, int librairyId) {
+        BusinessLogger.logger.trace("entering method filterBookReferenceListByLibrairy with param librairyId = " + librairyId);
 
         if (librairyId != -1) {
 
@@ -111,6 +111,8 @@ public class BookResearchManager {
      * @return This method returns a list of all the librairies
      */
     public List<Librairy> getAllLibrairies() {
+        BusinessLogger.logger.trace("entering getAllLibrairies()");
+
         return librairyDAO.findAll();
     }
 
@@ -122,6 +124,8 @@ public class BookResearchManager {
      * @return
      */
     public Set<String> convertListStringIntoSetString(List<String> keywords) {
+        BusinessLogger.logger.trace("entering method convertListStringIntoSetString");
+
         return new HashSet<>(keywords);
     }
 

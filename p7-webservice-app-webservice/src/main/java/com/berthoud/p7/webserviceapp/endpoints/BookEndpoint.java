@@ -1,5 +1,6 @@
 package com.berthoud.p7.webserviceapp.endpoints;
 
+import com.berthoud.p7.webserviceapp.WebserviceApp;
 import com.berthoud.p7.webserviceapp.business.BookResearchManager;
 import com.berthoud.p7.webserviceapp.model.entities.Book;
 import com.berthoud.p7.webserviceapp.model.entities.BookReference;
@@ -31,6 +32,8 @@ public class BookEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "bookRequest")
     @ResponsePayload
     public BookResponse getListOfBookReferences(@RequestPayload BookRequest r) throws DatatypeConfigurationException {
+        WebserviceApp.logger.trace("SOAP call bookRequest");
+
         BookResponse response = new BookResponse();
 
         List<BookReference> bookReferenceList =
@@ -85,6 +88,8 @@ public class BookEndpoint {
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "listLibrairyRequest")
     @ResponsePayload
     public ListLibrairyResponse getAllLibrairies(@RequestPayload ListLibrairyRequest r)  {
+        WebserviceApp.logger.trace("SOAP call listLibrairyRequest");
+
         ListLibrairyResponse response = new ListLibrairyResponse();
 
         List<Librairy> librairyList = bookResearchManager.getAllLibrairies();

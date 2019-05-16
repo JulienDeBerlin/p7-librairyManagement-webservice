@@ -33,22 +33,25 @@ public class CustomerManager {
      * @return If the password is correct, the Customer object is returned.
      */
     public Customer login(String email, String password) throws ServiceFaultException {
+        BusinessLogger.logger.trace("entering method login with param email = " + email);
+
         Optional<Customer> customerOptional = customerDAO.findByEmail(email);
         if (customerOptional.isPresent()) {
             if (checkPasswordBCrypt(password, customerOptional.get().getPassword())) {
+                BusinessLogger.logger.info("login with email = " + email + " was successfull");
                 return customerOptional.get();
             } else {
                 ServiceStatus serviceStatus = new ServiceStatus();
                 serviceStatus.setCode("-1");
                 serviceStatus.setDescription("the password is not correct.");
+                BusinessLogger.logger.info("failure login with email = " + email + ", cause: wrong password");
+                BusinessLogger.logger.error("ServiceFaultException, login denied");
                 throw new ServiceFaultException("login denied", serviceStatus);
+
+
             }
         } else {
-//            ServiceStatus serviceStatus = new ServiceStatus();
-//            serviceStatus.setCode("-2");
-//            serviceStatus.setDescription("No user registered under this email");
-//            throw new ServiceFaultException("login denied", serviceStatus);
-
+            BusinessLogger.logger.error("RuntimeException, no user registered under this email");
             throw new RuntimeException("no user registered under this email");
         }
     }
@@ -60,6 +63,8 @@ public class CustomerManager {
      * @return the Customer object
      */
     public Customer refresh(String email) {
+        BusinessLogger.logger.trace("entering method refresh with param email = " + email);
+
         Optional<Customer> customerOptional = customerDAO.findByEmail(email);
         return customerOptional.get();
     }
@@ -78,6 +83,8 @@ public class CustomerManager {
      * @return String - a string of length 60 that is the bcrypt hashed password in crypt(3) format.
      */
     public static String hashPasswordBCrypt(String password_plaintext) {
+        BusinessLogger.logger.trace("entering method hashPasswordBCrypt with param password_plaintext");
+
         String salt = BCrypt.gensalt(workload);
         String hashed_password = BCrypt.hashpw(password_plaintext, salt);
 
@@ -95,12 +102,17 @@ public class CustomerManager {
      * @return boolean - true if the password matches the password of the stored hash, false otherwise
      */
     public static boolean checkPasswordBCrypt(String password_plaintext, String stored_hash) {
+        BusinessLogger.logger.trace("entering method checkPasswordBCrypt");
+
         boolean password_verified = false;
 
-        if (null == stored_hash || !stored_hash.startsWith("$2a$"))
+        if (null == stored_hash || !stored_hash.startsWith("$2a$")) {
+            BusinessLogger.logger.error("IllegalArgumentException, Invalid hash provided for comparison\"");
             throw new java.lang.IllegalArgumentException("Invalid hash provided for comparison");
+        }
 
         password_verified = BCrypt.checkpw(password_plaintext, stored_hash);
+        BusinessLogger.logger.info("password ok");
 
         return (password_verified);
     }
