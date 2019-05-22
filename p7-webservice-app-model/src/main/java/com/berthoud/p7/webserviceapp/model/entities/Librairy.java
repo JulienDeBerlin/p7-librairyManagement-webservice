@@ -10,6 +10,8 @@ public class Librairy extends AuditModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @Column(nullable = false)
     private String name;
 
     @OneToOne(cascade = CascadeType.ALL)

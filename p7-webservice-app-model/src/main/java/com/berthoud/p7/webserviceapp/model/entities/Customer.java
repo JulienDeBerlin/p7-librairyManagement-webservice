@@ -20,11 +20,13 @@ public class Customer extends AuditModel {
     private String surname;
 
     @Column(nullable = false)
-    private String sex;
+    private char sex;
 
     @Column(nullable = false)
     private LocalDate dateExpirationMembership;
     private String phone;
+
+    @Column(nullable = false)
     private String email;
 
     @Column(nullable = false)
@@ -38,7 +40,7 @@ public class Customer extends AuditModel {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<Loan> loans;
 
-    public Customer(String firstName, String surname, String sex, LocalDate dateExpirationMembership, String phone, String email, String password, Address address, Set<Loan> loans) {
+    public Customer(String firstName, String surname, char sex, LocalDate dateExpirationMembership, String phone, String email, String password, Address address, Set<Loan> loans) {
         this.firstName = firstName;
         this.surname = surname;
         this.sex = sex;
@@ -78,11 +80,11 @@ public class Customer extends AuditModel {
         this.surname = surname;
     }
 
-    public String getSex() {
+    public char getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(char sex) {
         this.sex = sex;
     }
 
