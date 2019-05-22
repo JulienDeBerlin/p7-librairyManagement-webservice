@@ -62,6 +62,9 @@ Though the meaning of these codes can easily be found in the javadoc, here below
 0 = failure (no loan active with for this book id)
 -1 = failure (bookId is not a valid book id)
 
+**loginCustomerResponse and refreshCustomerResponse**
+
+returns a Customer object with a nested collection of Loans. Please note that the collection included ALL the loans made by the customer (open loans AND returned loans). By all open loans, dateBack = 1900-01-01. 
 
 ### **Configuration and stack**
 * This application is a multi-module **Maven Spring Boot 2** project.
