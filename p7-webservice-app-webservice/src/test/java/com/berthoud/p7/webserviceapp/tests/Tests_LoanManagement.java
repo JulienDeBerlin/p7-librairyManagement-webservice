@@ -110,16 +110,16 @@ public class Tests_LoanManagement {
     public void testMonitoringLoans() {
 
         List<Loan> listLoansLate = loanManager.getOpenLoansLate();
-        assertEquals(listLoansLate.size(), 5);
+        assertEquals(listLoansLate.size(), 4);
 
         List<Loan> listLoansInTime = loanManager.getOpenLoansInTime();
-        assertEquals(listLoansInTime.size(), 2);
+        assertEquals(listLoansInTime.size(), 3);
 
         List<Loan> listAllLoans = loanManager.getAllOpenLoans();
         assertEquals(listAllLoans.size(), 7);
 
         List<Loan> listOpenLoansExtended = loanManager.getOpenLoansExtended();
-        assertEquals(listOpenLoansExtended.size(), 5);
+        assertEquals(listOpenLoansExtended.size(), 6);
 
     }
 
